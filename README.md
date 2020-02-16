@@ -1,6 +1,6 @@
 # node-sessions
 Creating sessions using node JS
 
-npm start
+# npm start
 
 Starts the node server
