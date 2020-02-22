@@ -6,6 +6,7 @@ const path = require("path");
 const session = require("express-session");
 
 const app = express();
+app.locals.data = require('./JSON/question.json');
 const connection = mongoose.connection;
 
 mongoose.connect("mongodb://localhost:27017/users", {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
