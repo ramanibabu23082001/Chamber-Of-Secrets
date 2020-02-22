@@ -19,7 +19,7 @@ router.get("/addUserForm/", function (req, res, next) {
 router.post("/addUser/", userController.addUser);
 
 router.get("/login/", function(req, res, next){
-    if(session.username)
+    if(session.email)
         res.redirect("/logged/");
     res.locals.session = session,
     res.locals.csrfToken = req.csrfToken()
@@ -34,8 +34,9 @@ userController.loginForm
 );
 
 router.get("/logged/", function(req, res, next){
-    if(!session.username)
-        res.redirect("/login/");
+    //console.log("hi");
+    if(!session.email)
+        res.redirect("/");
     res.locals.session = session
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -56,8 +57,17 @@ userController.loginCheck
 );
 
 router.get("/logout/", function(req, res, next){
-    session.username = null;
-    res.redirect("/login/");
+    session.email = null;
+    res.redirect("/");
 });
+
+router.get("/", function(req, res, next){
+    if(session.email)
+        res.redirect("/logged/");
+    res.locals.csrfToken = req.csrfToken()
+    next()
+},
+userController.landingPage
+);
 
 module.exports = router;

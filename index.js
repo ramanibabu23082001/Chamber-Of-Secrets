@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authSystem");
 const bodyParser = require("body-parser");
+const path = require("path");
 const session = require("express-session");
 
 const app = express();
@@ -13,7 +14,8 @@ connection.once("open", () => {
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({secret: "thisismysecret", resave: false, saveUninitialized: false}))
+app.use(session({secret: "thisismysecret", resave: false, saveUninitialized: false}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set("view engine", "ejs");
 

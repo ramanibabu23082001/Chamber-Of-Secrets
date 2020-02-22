@@ -1,4 +1,294 @@
-<html>
-    <h1>Welcome <%= loggedUser[0].name %></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Page</title>
+    <!--Bootstrap Links-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+    <!--Material Design Icons-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"
+          rel="stylesheet">
+    
+    <!--swiper class links-->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+
+
+    <!--Custom Css file-->
+    <link rel="stylesheet" href="/css/logged.css">
+    <!--Font Awesome Link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
     <a href="/logout/"><button>LOGOUT</button></a>
+    <div class="finalpage" id="finalpage">
+   
+        <div class="section1" id="section1">
+
+            <div class="container">
+        
+                <div class="row justify-content-center">
+        
+                
+        
+               <div class="col-10 col-md-6 mainsection">
+                     
+                <div class="header">
+                    <p>Hola, <%= loggedUser[0].name %></p>
+                    <p id="levelno">🏆 4 </p>
+                </div>
+                
+
+                   
+                 
+
+                   <div class="carousel">
+                    <!--Carousel Begins-->
+                    <section class="cd-slider">
+                        <!--section-->
+
+                       
+                        
+                 
+                    <ul>
+                        <!--first list-->
+                        <li data-color="#FF384B">
+                            <div class="content">
+                                <div class="imagecontainer">
+                                    <div class="imagewrapper">
+                                        <img src="/asset/one.jfif" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--second list-->
+                        <li data-color="#FF9C00">
+                            <div class="content">
+                                <div class="imagecontainer">
+                                    <div class="imagewrapper">
+                                        <img src="/asset/two.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--third list-->
+                        <li data-color="#002AFF">
+                            <div class="content">
+                                <div class="imagecontainer">
+                                    <div class="imagewrapper">
+                                        <img src="/asset/virat.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--navigation-->
+                    <nav>
+                    <div><a href="#" class="prev"></a></div>
+                    <div><a href="#" class="next"></a></div>
+                    </nav>
+                </section>
+
+
+
+            
+                   </div>
+
+
+
+                   <div class="container" id="pagination">
+                    <div class="row app">
+                        
+                        <div class="but active">
+
+                        </div>
+                        <div class="but">
+
+                        </div>
+                        <div class="but">
+
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="wronganswer">
+                    <p>Wrong Answer!!</p>
+                </div>
+                   <div class="inputdiv">
+                    <form>
+                     <input type="text" placeholder="Answer Please!">
+                     </form>
+        </form>
+        
+                </div>
+                   
+        
+                   <div class="buttontag">
+        
+                       <div class="row">
+        
+                           <div class="col-6"> <button type="button" id="hintbutton"> Hint</button> </div>
+                                <div class="col-6"> <button type="button" id="answerbutton" onclick="toggle()" >Answer</button> </div>
+
+                            </a>
+        
+                      
+        
+                    </div>
+        
+                   </div>
+        
+              </div>
+        
+                </div>
+        
+            </div>
+        
+        </div>
+
+        
+        <!--Carousel 0-->
+
+        
+
+    </div>
+    
+    
+          
+            
+                <div class="container" id="popup">
+                    <div class="row queen">
+                        <i class="fa fa-times-circle" onclick="toggle()"></i>
+                    </div>
+                   
+                    <div class="row king">
+                        <div class="col-4 col-md-4 team1">
+                            <img src="/asset/ezgif-7-08d84802588d.gif" alt="" style="width: 90%; height:90%">
+                        </div>
+                        <div class="col-4 col-md-4 vs">
+                            <h1>Level 3 🆙</h1>
+                        
+                            <div class="match">
+                            😎  You  🆚   CPU  🤖
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4 team2">
+                            <img src="/asset/pooja.gif" alt="" style="width: 90%; height:90%">
+                        </div>
+
+                    </div>
+                  
+                   
+                  
+                    
+                </div>
+            
+         
+                
+         
+       
+       
+       
+     
+    
+ 
+   
+   
+
+    <!--Bootstrap CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--Custom Javascript file-->
+<script  src="../js/questioncarousel1.js"></script>
+   <script src="../js/questioncarousel0.js"></script> 
+
+
+    <!-- <script type="text/javascript">
+    function ui()
+{
+ document.getElementById("section1").style.display = "block";
+ document.getElementById("section2").style.display = "none";
+ document.getElementById("leaderboard").style.backgroundColor = defaultcolor;
+ document.getElementById("quiz").style.backgroundColor = activecolor;
+
+};
+var activecolor = 'rgba(238,113,0,1)';
+
+var defaultcolor = '#1A1B1E';
+function ux()
+{
+    document.getElementById("section1").style.display = "none";
+ document.getElementById("section2").style.display = "block";
+ document.getElementById("leaderboard").style.backgroundColor = activecolor;
+ document.getElementById("quiz").style.backgroundColor = defaultcolor;
+ 
+};
+
+-->
+<script>
+    function toggle()
+{
+    var blur = document.getElementById('finalpage');
+    blur.classList.toggle('active');
+    var popup = document.getElementById('popup');
+    popup.classList.toggle('active');
+    
+  
+    
+  
+}
+
+
+// $(function()
+// {
+    
+//     var button = $('.but');
+
+//     function switchToNext()
+//     {
+//         var _this = $(this);
+        
+//         if(_this.hasClass('active'))
+//             return false;
+//         else
+//         {
+//             $('.but.active').removeClass('active');
+//             _this.addClass('active');
+//         }
+//     }
+
+//     button.on('click',switchToNext);
+// });
+</script>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--Swiper CDN Script-->
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
+
+
+</body>
 </html>

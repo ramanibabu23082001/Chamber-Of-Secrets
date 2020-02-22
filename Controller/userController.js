@@ -23,7 +23,7 @@ exports.addUser = (req, res, next) => {
 };
 
 exports.loginForm = (req, res, next) => {
-    if(res.locals.session.username)
+    if(res.locals.session.email)
         res.redirect("/logged/");
     res.render("loginForm", {
         message: "",
@@ -32,12 +32,13 @@ exports.loginForm = (req, res, next) => {
 };
 
 exports.loginCheck = (req, res, next) => {
-    var credentials = {username: req.body.username, password: req.body.password};
+    console.log(req.body.email+req.body.password);
+    var credentials = {email: req.body.email, password: req.body.password};
     User.find(credentials)
     .then(user => {
         console.log(user);
         if(JSON.stringify(user) !== JSON.stringify([])){
-            res.locals.session.username = req.body.username;
+            res.locals.session.email = req.body.email;
             res.redirect("/logged/");
         }
         else{
@@ -50,7 +51,7 @@ exports.loginCheck = (req, res, next) => {
 };
 
 exports.loggedPage = (req, res, next) => {
-    User.find({username: res.locals.session.username})
+    User.find({email: res.locals.session.email})
     .then(user => {
         res.render("logged", {
             loggedUser: user
@@ -60,3 +61,10 @@ exports.loggedPage = (req, res, next) => {
         console.log(err);
     });
 };
+
+
+exports.landingPage = (req, res, next) => {
+    res.render("landingPage", {
+        csrfToken: res.locals.csrfToken
+    });
+}

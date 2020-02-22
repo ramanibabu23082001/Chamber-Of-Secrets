@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: {
+    email: {
         type: String,
         unique: true
     },
@@ -14,6 +14,10 @@ const userSchema = new Schema({
     },
     level: {
         type: Number,
+        default: 0
+    },
+    score: {
+        type: Number, 
         default: 0
     }
 });
