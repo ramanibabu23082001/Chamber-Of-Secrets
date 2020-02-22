@@ -23,6 +23,11 @@ router.get("/login/", function(req, res, next){
         res.redirect("/logged/");
     res.locals.session = session,
     res.locals.csrfToken = req.csrfToken()
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma' : 'no-cache',
+        'Expires' : '0',
+    })
     next()
 },
 userController.loginForm
@@ -32,6 +37,11 @@ router.get("/logged/", function(req, res, next){
     if(!session.username)
         res.redirect("/login/");
     res.locals.session = session
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma' : 'no-cache',
+        'Expires' : '0',
+    })
     next()
 },
 userController.loggedPage
