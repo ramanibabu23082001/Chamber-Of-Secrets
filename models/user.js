@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+    name: {
+        type: String
+    },
     email: {
         type: String,
         unique: true
@@ -9,17 +12,17 @@ const userSchema = new Schema({
     password: {
         type: String
     },
-    name: {
+    contact: {
+        type: Number
+    },
+    college: {
         type: String
     },
     level: {
         type: Number,
         default: 1
     },
-    score: {
-        type: Number, 
-        default: 0
-    }
+
 });
 
 module.exports = mongoose.model("User", userSchema);

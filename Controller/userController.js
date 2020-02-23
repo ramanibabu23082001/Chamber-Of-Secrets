@@ -7,15 +7,17 @@ exports.addUserForm = (req, res, next) => {
 };
 
 exports.addUser = (req, res, next) => {
-    const username = req.body.username;
-    const password = req.body.password;
     const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const contact = req.body.contact;
+    const college = req.body.college;
 
-    const user = new User({username: username, password: password, name: name});
+    const user = new User({name: name, email: email, password: password, contact: contact, college: college});
     user.save()
     .then(
         console.log("User created successfully!"),
-        res.redirect("/addUserForm/")
+        res.redirect("/")
     )
     .catch(err => {
         console.log(err);
@@ -41,7 +43,7 @@ exports.loginCheck = (req, res, next) => {
             res.redirect("/logged/");
         }
         else{
-            res.redirect("/login/");
+            res.redirect("/");
         }
     })
     .catch(err => {
@@ -114,4 +116,32 @@ exports.validateAnswer = (req, res, next) => {
     }
     */
    
+}
+
+exports.checkEmail = (req, res, next) => {
+    /*
+    if(JSON.stringify(User.findOne({email: res.locals.email})) !== JSON.stringify([])){
+        console.log("hi");
+        //console.log(User.findOne({email: res.locals.email}));
+        //res.locals.error = "Email already exists";
+        res.json({error_message: "Email already exists"});
+        //res.redirect("/");
+    }
+    
+
+    else{
+        res.json({error_message: "Email available"});
+    }
+    */
+    //console.log("email inside controller " + res.locals.email);
+    User.findOne({email: res.locals.email})
+    .then(user => {
+        console.log("The user with email is " + user);
+        if(user != null){
+            res.json({message: "Email already exists"});
+        }
+        else{
+            res.json({message: "Email available"});
+        }
+    });
 }

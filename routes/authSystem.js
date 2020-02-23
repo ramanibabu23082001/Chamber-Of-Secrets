@@ -11,15 +11,15 @@ const csrfProtection = csrf();
 
 const userController = require("../Controller/userController");
 
-router.get("/addUserForm/", function (req, res, next) {
+/* router.get("/addUserForm/", function (req, res, next) {
     //res.locals.csrfToken = req.csrfToken()
     next()
 },
     userController.addUserForm
-);
+); */
 router.post("/addUser/", userController.addUser);
 
-router.get("/login/", function (req, res, next) {
+/* router.get("/login/", function (req, res, next) {
     if (session.email)
         res.redirect("/logged/");
     res.locals.session = session,
@@ -32,7 +32,7 @@ router.get("/login/", function (req, res, next) {
     next()
 },
     userController.loginForm
-);
+); */
 
 router.get("/logged/", function (req, res, next) {
     //console.log("hi");
@@ -67,28 +67,20 @@ router.get("/logout/", function (req, res, next) {
 });
 
 router.get("/", function (req, res, next) {
+    console.log(req.error);
     if (session.email)
         res.redirect("/logged/");
-    //res.locals.csrfToken = req.csrfToken()
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
 },
     userController.landingPage
 );
 
 router.post("/validateAnswer/", function (req, res, next) {
-    /*
-    const tex = req.body.name;
-    
-   const jsonParsed = require("../JSON/question.json");
-   if (jsonParsed[i].answer === tex) {
-        res.json({ data: "1", path: jsonParsed[i + 1].question, number: jsonParsed[i].number, gif: jsonParsed[i].gif });
-        i = i + 1;
-    }
-    else {
-        console.log(jsonParsed[i].gif);
-        res.json({ data: "0" });
-    }
-    */
    res.locals.session = session
    res.locals.text = req.body.name
    next()
@@ -97,3 +89,10 @@ router.post("/validateAnswer/", function (req, res, next) {
 );
 
 module.exports = router;
+
+router.post("/checkEmail/", function(req, res, next){
+    res.locals.email = req.body.email
+    next()
+},
+    userController.checkEmail
+);

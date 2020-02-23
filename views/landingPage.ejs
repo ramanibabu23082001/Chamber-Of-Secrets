@@ -102,27 +102,28 @@
       <div class="col-10 col-md-4 form">
           
           <h2>Profile</h2>
-          <form action="" id="sigform">
+          <form action="/addUser/" method="POST" id="sigform">
           <div class="input">
               <div class="inputBox">
-                  <label>User Name</label>
-                  <input type="text" name="" placeholder="name" required>
+                  <label>Name</label>
+                  <input type="text" name="name" placeholder="name" required>
               </div>
               <div class="inputBox">
                   <label>Email</label>
-                  <input type="email" name="" placeholder="abc@gmail.com" required>
+                  <input type="email" name="email" id="email" placeholder="abc@gmail.com" onchange = "checkEmail()" required>
               </div>
+              <div id="message" style="color: white;"></div>
               <div class="inputBox">
                   <label>Contact Number</label>
-                  <input type="number" name="" placeholder="9000111000"required>
+                  <input type="number" name="contact" placeholder="9000111000"required>
               </div>
               <div class="inputBox">
                   <label>College Name</label>
-                  <input type="text" name="" placeholder="college" required>
+                  <input type="text" name="college" placeholder="college" required>
               </div>
               <div class="inputBox">
                   <label>Password</label>
-                  <input type="password" name="" id="pwd" placeholder="****" required>
+                  <input type="password" name="password" id="pwd" placeholder="****" required>
               </div>
                           <div class="inputBox">
                   <label>Confirm Password</label>
@@ -200,7 +201,19 @@ function hmm(){
 		   }
 		});
 
-	});
+    });
+    function checkEmail(){
+        var email = document.getElementById("email").value;
+        $.ajax({
+            type: "post",
+            url: "/checkEmail/",
+            data: {email: email}, 
+            success: function(data){
+                document.getElementById("message").innerHTML = data.message;
+            }
+        });
+    }
+    
 </script>
     
 
