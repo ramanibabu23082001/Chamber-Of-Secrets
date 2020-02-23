@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body onload="checkLoginFail()">
     <div class="container-fluid mai" id="landing">
         <div class="container title" id="title">
             <div class="row justify-content-center">
@@ -77,8 +77,8 @@
                             <input type="password" name="password" placeholder="******">
                         </div>
 
-
-
+                        <input type="hidden" id="wrong_credentials" value="<%= loginFail %>">
+                        <div id="login_error" style="color: red;"><%= login_error %></div>
                         <div class="inputbox">
                             <input type="submit" value="Login" id="logbutton">
 
@@ -161,6 +161,11 @@
             document.getElementById('landing').style.display = 'none';
             document.getElementById('sigin').style.display = 'block';
         });
+        function displayLogin(){
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('sigin').style.display = 'none';
+        }
     </script>
     <script>
 
@@ -183,6 +188,15 @@
             }
         }
 
+        function checkLoginFail(){
+            console.log("hi");
+            console.log("The value of login fail is" + document.getElementById("wrong_credentials").value);
+            if(document.getElementById("wrong_credentials").value == 1){
+                console.log("display the login");
+                displayLogin();
+                document.getElementById("wrong_credentials").value == 0;
+            }
+        }
         
 
         $('#logform').keydown(function () {
@@ -210,6 +224,11 @@
     </script>
     <script>
         $(document).ready(function () {
+            console.log("The value of login fail is" + $('#wrong_credentials').value);
+            if($("#wrong_credentials").value === 1){
+                console.log("display the login");
+                displayLogin();
+            }
             $('#cpwd').keyup(function () {
                 var pwd = $('#pwd').val();
                 var cpwd = $('#cpwd').val();

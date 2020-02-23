@@ -5,8 +5,7 @@ const csrf = require("csurf");
 var session = require("express-session");
 var i = 0;
 
-const csrfProtection = csrf();
-
+var loginFail = 0;
 //router.use(csrfProtection);
 
 const userController = require("../Controller/userController");
@@ -36,7 +35,7 @@ router.post("/addUser/", userController.addUser);
 
 router.get("/logged/", function (req, res, next) {
     //console.log("hi");
-    console.log(session.email);
+    //console.log(session.email);
     if (!session.email){
         res.redirect("/");
         //session.email = "hari@gmail.com";
@@ -54,9 +53,10 @@ router.get("/logged/", function (req, res, next) {
 );
 
 router.post("/loginCheck/", function (req, res, next) {
-    res.locals.session = session
+    res.locals.session = session;
+    res.locals.session.loginFail = loginFail;
     //res.locals.csrfToken = req.csrfToken()
-    next()
+    next();
 },
     userController.loginCheck
 );
@@ -67,7 +67,7 @@ router.get("/logout/", function (req, res, next) {
 });
 
 router.get("/", function (req, res, next) {
-    console.log(req.error);
+    //console.log("Login status: " + session.loginFail);
     if (session.email)
         res.redirect("/logged/");
     res.set({
@@ -75,6 +75,7 @@ router.get("/", function (req, res, next) {
         'Pragma': 'no-cache',
         'Expires': '0',
     })
+    res.locals.session = session;
     next()
 },
     userController.landingPage

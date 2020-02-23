@@ -35,15 +35,19 @@ exports.loginForm = (req, res, next) => {
 
 exports.loginCheck = (req, res, next) => {
     var credentials = {email: req.body.email, password: req.body.password};
+    //console.log("Login fail before is " + res.locals.loginFail);
     User.find(credentials)
     .then(user => {
         //console.log(user);
         if(JSON.stringify(user) !== JSON.stringify([])){
+            res.locals.session.loginFail = 0;
             res.locals.session.email = req.body.email;
             res.redirect("/logged/");
         }
         else{
+            res.locals.session.loginFail = 1;
             res.redirect("/");
+            
         }
     })
     .catch(err => {
@@ -71,9 +75,17 @@ exports.loggedPage = (req, res, next) => {
 
 
 exports.landingPage = (req, res, next) => {
+    console.log("Login fail value is " + res.locals.session.loginFail);
+    var login_error = "";
+    if(res.locals.session.loginFail === 1){
+        login_error = "Incorrect username/password";
+    }
     res.render("landingPage", {
         //csrfToken: res.locals.csrfToken
+        loginFail: res.locals.session.loginFail,
+        login_error: login_error
     });
+    res.locals.session.loginFail = 0;
 }
 
 exports.validateAnswer = (req, res, next) => {
@@ -81,8 +93,6 @@ exports.validateAnswer = (req, res, next) => {
     console.log("Your email is " + res.locals.session.email);
     User.findOne({email: res.locals.session.email})
     .then(user => {
-        //console.log("hi " + user);
-        //console.log("welcome " + user.name);
         console.log("your level is " + user.level);
         var i = user.level - 1;
         const tex = res.locals.text;
@@ -105,16 +115,6 @@ exports.validateAnswer = (req, res, next) => {
             }
     });
     
-    //var i = u.level;
-    
-    /*
-    if(res.locals.session.email){
-        User.find({email: res.locals.session.email})
-        .then(user =>{
-            i = user.level;
-        });
-    }
-    */
    
 }
 
