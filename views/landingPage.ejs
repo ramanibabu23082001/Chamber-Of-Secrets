@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,15 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
 
 
-     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/landingpage.css">
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="/css/sigin.css"> 
-   
+    <link rel="stylesheet" href="/css/sigin.css">
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 </head>
+
 <body>
     <div class="container-fluid mai" id="landing">
         <div class="container title" id="title">
@@ -25,38 +27,38 @@
                     <div class="h1div">
                         <h1>Itrix Premier League</h1>
                     </div>
-                    
+
                 </div>
-    
+
             </div>
             <div class="row justify-content-center">
 
-            <div class="col-4 col-md-3 sigbut">
-                <div class="tag">
-                    <a href="#" id="nk">
+                <div class="col-4 col-md-3 sigbut">
+                    <div class="tag">
+                        <a href="#" id="nk">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Signup
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-4 col-md-3 logbut">
+                    <a href="#" id="li">
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
-                        Signup
+                        Login
                     </a>
                 </div>
-            
-            </div>
-            <div class="col-4 col-md-3 logbut">
-                <a href="#" id="li">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Login
-                </a>
             </div>
         </div>
-        </div>
-       
-      
-        
+
+
+
     </div>
     <div class="container-fluid login" id="login" style="display: none;">
         <div class="row justify-content-center">
@@ -68,162 +70,190 @@
                             <label>Email</label>
                             <input type="email" name="email" placeholder="example@gmail.com">
                         </div>
-      
-                    
+
+
                         <div class="inputbox">
                             <label>Password</label>
                             <input type="password" name="password" placeholder="******">
                         </div>
-                    
-                    		
+
+
 
                         <div class="inputbox">
                             <input type="submit" value="Login" id="logbutton">
-    
+
                         </div>
                         <div class="signupitems">
                             <div class="inputbox">
                                 <label class="newuser">New User?</label>
                                 <input type="button" value="Signup" onclick="hmm()">
-                                
+
                             </div>
                         </div>
-                     
-    
-                </div>
+
+
+                    </div>
                 </form>
-              
+
+            </div>
         </div>
-    </div>
     </div>
     <div class="container-fluid " id="sigin" style="display: none;">
         <div class="row justify-content-center">
-  
-      <div class="col-10 col-md-4 form">
-          
-          <h2>Profile</h2>
-          <form action="/addUser/" method="POST" id="sigform">
-          <div class="input">
-              <div class="inputBox">
-                  <label>Name</label>
-                  <input type="text" name="name" placeholder="name" required>
-              </div>
-              <div class="inputBox">
-                  <label>Email</label>
-                  <input type="email" name="email" id="email" placeholder="abc@gmail.com" onchange = "checkEmail()" required>
-              </div>
-              <div id="message" style="color: white;"></div>
-              <div class="inputBox">
-                  <label>Contact Number</label>
-                  <input type="number" name="contact" placeholder="9000111000"required>
-              </div>
-              <div class="inputBox">
-                  <label>College Name</label>
-                  <input type="text" name="college" placeholder="college" required>
-              </div>
-              <div class="inputBox">
-                  <label>Password</label>
-                  <input type="password" name="password" id="pwd" placeholder="****" required>
-              </div>
-                          <div class="inputBox">
-                  <label>Confirm Password</label>
-                  <input type="password" name="" id="cpwd" placeholder="****" required>
-              </div>
-                      <div class="inputBox">
-                  
-              <div id="showErrorPwd"></div>
-              </div>
-              <div class="inputBox">
-                  
-                  <input type="submit" name="" value="Sign Up" id="login"> 
-              </div>
-          </div>
-          </form>
-      </div>
-  </div>
-  
-              </div>
+
+            <div class="col-10 col-md-4 form">
+
+                <h2>Profile</h2>
+                <form action="/addUser/" method="POST" id="sigform">
+                    <div class="input">
+                        
+                        <div class="inputBox">
+                            <label>Name</label>
+                            <input type="text" name="name" placeholder="name" required>
+                        </div>
+                        <div class="inputBox">
+                            <label>Email</label>
+                            <input type="email" name="email" id="email" placeholder="abc@gmail.com"
+                                onkeyup="checkEmail()" required>
+                        </div>
+                        <div id="message" style="color: red;"></div>
+                        <div class="inputBox">
+                            <label>Contact Number</label>
+                            <input type="number" name="contact" id="contact" placeholder="9000111000" onkeyup = "checkLength()" required>
+                            <div id="contact_error" style="color: red;"></div>
+                        </div>
+                        <div class="inputBox">
+                            <label>College Name</label>
+                            <input type="text" name="college" placeholder="college" required>
+                        </div>
+                        <div class="inputBox">
+                            <label>Password</label>
+                            <input type="password" name="password" id="pwd" placeholder="****" required>
+                        </div>
+                        <div class="inputBox">
+                            <label>Confirm Password</label>
+                            <input type="password" name="" id="cpwd" placeholder="****" required />
+                        </div>
+                        <div class="inputBox">
+
+                            <div id="showErrorPwd"></div>
+                        </div>
+                        <div class="inputBox">
+                            <input type="submit" name="" value="Sign Up" id="signup"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
 
 
-<script>
-    document.getElementById('li').addEventListener('click',function(){
-    document.getElementById('login').style.display = 'block';
-    document.getElementById('landing').style.display = 'none';
-    document.getElementById('sigin').style.display = 'none';
+    <script>
+        document.getElementById('li').addEventListener('click', function () {
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('sigin').style.display = 'none';
 
-});
-document.getElementById('nk').addEventListener('click',function(){
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('landing').style.display = 'none';
-    document.getElementById('sigin').style.display = 'block';
-});
-</script>
-<script>
-    $('#logform').keydown(function() {
-var key = e.which;
-if (key == 13) {
-$('#logform').submit(); 
-}
-});
-$('#sigform').keydown(function() {
-var key = e.which;
-if (key == 13) {
-$('#sigform').submit(); 
-}
-});
-function hmm(){
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('landing').style.display = 'none';
-    document.getElementById('sigin').style.display = 'block';
-
-
-}
-</script>
-<script>
-    $(document).ready(function()
-{
-		$('#cpwd').keyup(function()
-		{
-			var pwd=$('#pwd').val();
-		   var cpwd=$('#cpwd').val();
-
-		   if(cpwd!=pwd)
-		   {
-		   	$('#showErrorPwd').html('Passwords are not matching');
-		    $('#showErrorPwd').css('color','red');
-		    return false;
-		   }
-		   else
-		   {
-		   		$('#showErrorPwd').html('');
-		   
-		    return false;
-		   }
-		});
-
-    });
-    function checkEmail(){
-        var email = document.getElementById("email").value;
-        $.ajax({
-            type: "post",
-            url: "/checkEmail/",
-            data: {email: email}, 
-            success: function(data){
-                document.getElementById("message").innerHTML = data.message;
-            }
         });
+        document.getElementById('nk').addEventListener('click', function () {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('sigin').style.display = 'block';
+        });
+    </script>
+    <script>
+
+        function disableSubmit(){
+            $('#signup').attr("disabled", true);
+        }
+
+        function enableSubmit(){
+            $('#signup').attr("disabled", false);
+        }
+
+        function checkLength(){
+            if(document.getElementById("contact").value.length != 10){
+                disableSubmit();
+                document.getElementById("contact_error").innerHTML = "Please enter a valid contact number";
+            }
+            else{
+                document.getElementById("contact_error").innerHTML = "";
+                enableSubmit();
+            }
+        }
+
+        
+
+        $('#logform').keydown(function () {
+            /*
+    var key = e.which;
+    
+    if (key == 13) {
+    $('#logform').submit(); 
     }
-    
-</script>
-    
+    });
+    $('#sigform').keydown(function() {
+    var key = e.which;
+    if (key == 13) {
+    $('#sigform').submit(); 
+    }
+    */
+        });
+        function hmm() {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('sigin').style.display = 'block';
+
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#cpwd').keyup(function () {
+                var pwd = $('#pwd').val();
+                var cpwd = $('#cpwd').val();
+
+                if (cpwd != pwd) {
+                    $('#showErrorPwd').html('Passwords are not matching');
+                    $('#showErrorPwd').css('color', 'red');
+                    return false;
+                }
+                else {
+                    $('#showErrorPwd').html('');
+
+                    return false;
+                }
+            });
+
+        });
+        function checkEmail() {
+            var email = document.getElementById("email").value;
+            $.ajax({
+                type: "post",
+                url: "/checkEmail/",
+                data: { email: email },
+                success: function (data) {
+                    if(data.message === ""){
+                        enableSubmit();
+                    }
+                    else{
+                        disableSubmit();
+                    }
+                    document.getElementById("message").innerHTML = data.message;
+                }
+            });
+        }
+
+    </script>
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-2.2.4.js"
-      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 </body>
+
 </html>

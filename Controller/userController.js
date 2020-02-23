@@ -119,21 +119,6 @@ exports.validateAnswer = (req, res, next) => {
 }
 
 exports.checkEmail = (req, res, next) => {
-    /*
-    if(JSON.stringify(User.findOne({email: res.locals.email})) !== JSON.stringify([])){
-        console.log("hi");
-        //console.log(User.findOne({email: res.locals.email}));
-        //res.locals.error = "Email already exists";
-        res.json({error_message: "Email already exists"});
-        //res.redirect("/");
-    }
-    
-
-    else{
-        res.json({error_message: "Email available"});
-    }
-    */
-    //console.log("email inside controller " + res.locals.email);
     User.findOne({email: res.locals.email})
     .then(user => {
         console.log("The user with email is " + user);
@@ -141,7 +126,7 @@ exports.checkEmail = (req, res, next) => {
             res.json({message: "Email already exists"});
         }
         else{
-            res.json({message: "Email available"});
+            res.json({message: ""});
         }
     });
 }
