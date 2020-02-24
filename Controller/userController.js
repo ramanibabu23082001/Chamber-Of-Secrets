@@ -16,6 +16,7 @@ exports.addUser = (req, res, next) => {
     const user = new User({name: name, email: email, password: password, contact: contact, college: college});
     user.save()
     .then(
+        res.locals.session.email = email,
         console.log("User created successfully!"),
         res.redirect("/")
     )

@@ -16,7 +16,11 @@ const userController = require("../Controller/userController");
 },
     userController.addUserForm
 ); */
-router.post("/addUser/", userController.addUser);
+router.post("/addUser/", function(req, res, next){
+    res.locals.session = req.session;
+    next()
+},
+userController.addUser);
 
 /* router.get("/login/", function (req, res, next) {
     if (session.email)
@@ -36,12 +40,12 @@ router.post("/addUser/", userController.addUser);
 router.get("/logged/", function (req, res, next) {
     //console.log("hi");
     //console.log(session.email);
-    if (!session.email){
+    if (!req.session.email){
         res.redirect("/");
         //session.email = "hari@gmail.com";
     }
     
-    res.locals.session = session
+    res.locals.session = req.session
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
@@ -53,7 +57,7 @@ router.get("/logged/", function (req, res, next) {
 );
 
 router.post("/loginCheck/", function (req, res, next) {
-    res.locals.session = session;
+    res.locals.session = req.session;
     res.locals.session.loginFail = loginFail;
     //res.locals.csrfToken = req.csrfToken()
     next();
@@ -62,27 +66,27 @@ router.post("/loginCheck/", function (req, res, next) {
 );
 
 router.get("/logout/", function (req, res, next) {
-    session.email = null;
+    req.session.email = null;
     res.redirect("/");
 });
 
 router.get("/", function (req, res, next) {
     //console.log("Login status: " + session.loginFail);
-    if (session.email)
+    if (req.session.email)
         res.redirect("/logged/");
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0',
     })
-    res.locals.session = session;
+    res.locals.session = req.session;
     next()
 },
     userController.landingPage
 );
 
 router.post("/validateAnswer/", function (req, res, next) {
-   res.locals.session = session
+   res.locals.session = req.session
    res.locals.text = req.body.name
    next()
 },
@@ -97,3 +101,7 @@ router.post("/checkEmail/", function(req, res, next){
 },
     userController.checkEmail
 );
+
+router.post("/logged/", function(req, res, next){
+    res.redirect("/logged/");
+});
