@@ -312,8 +312,7 @@
       if (key == 13) {
         var text = document.getElementById("ans").value;
       var texte = text.trim().toLowerCase();
-      console.log("clicked");
-      //console.log(text);
+
       $.ajax({
         type: "post",
         url: '/validateAnswer/',
@@ -321,18 +320,7 @@
         success: function (jd) {
 
           if (jd.data == "1") {
-            console.log(jd.path);
-            // if(jd.number=="10")
-            // {
-            //   $( ".s" ).replaceWith( "<p class='s'>"+"correct answer"+"</p>" );
-            //   $(".success").show("slow").delay(5000).queue(function(n) {
-            //   $(this).hide("slow");n();
-            //   });
-            //   $( ".k" ).replaceWith( "<p class='k'>"+"finished"+"</p>" );
-
-            // } 
-            // else{
-            //$(".right"),replaceWith("<p class='right' data-toggle='modal' data-target='#myModal'>");
+            
             $(".wrong").replaceWith("<p class='wrong'></p>");
             jQuery("#myModal").modal('toggle');
 
@@ -344,20 +332,14 @@
             $("#levelno").text("🏆 " + (jd.number + 1));
             $("#compeletedLevel").text("Level " + jd.number + " 🆙");
 
-            //     $(".modal-title").replaceWith("<h4 class='modal-title'>Hurrah!! You got it Right</h4>");
             $(".img-responsive").replaceWith("<img src='/" + jd.gif[1] + "' class='img-responsive'>");
             $(".modal fade").show("slow").delay(5000).queue(function (n) {
               $(this).hide("slow"); n();
             });
 
-
-            // }
           }
           else {
-            console.log(jd);
-            //  $(".ping").replaceWith("<button type='button' id='answerbutton' class='ting' >Answer</button> ");
-            //$(".modal-title").replaceWith("<h4 class='modal-title'>Oops! you are Wrong.</h4>");
-            // $( ".img-responsive" ).replaceWith( "<img src='"+jd.gif[0]+"' class='img-responsive'>");
+            
             $(".wrong").replaceWith("<p class='wrong'>Wrong Answer!!</p>");
             $(".wrong").show("slow").delay(3500).queue(function (n) {
               $(this).hide("slow"); n();
@@ -375,8 +357,7 @@
 $('#answerbutton').on('click', function () {
       var text = document.getElementById("ans").value;
       var texte = text.trim().toLowerCase();
-      console.log("clicked");
-      //console.log(text);
+
       $.ajax({
         type: "post",
         url: '/validateAnswer/',
@@ -384,18 +365,7 @@ $('#answerbutton').on('click', function () {
         success: function (jd) {
 
           if (jd.data == "1") {
-            console.log(jd.path);
-            // if(jd.number=="10")
-            // {
-            //   $( ".s" ).replaceWith( "<p class='s'>"+"correct answer"+"</p>" );
-            //   $(".success").show("slow").delay(5000).queue(function(n) {
-            //   $(this).hide("slow");n();
-            //   });
-            //   $( ".k" ).replaceWith( "<p class='k'>"+"finished"+"</p>" );
-
-            // } 
-            // else{
-            //$(".right"),replaceWith("<p class='right' data-toggle='modal' data-target='#myModal'>");
+            
             $(".wrong").replaceWith("<p class='wrong'></p>");
             jQuery("#myModal").modal('toggle');
 
@@ -407,20 +377,16 @@ $('#answerbutton').on('click', function () {
             $("#levelno").text("🏆 " + (jd.number + 1));
             $("#compeletedLevel").text("Level " + jd.number + " 🆙");
 
-            //     $(".modal-title").replaceWith("<h4 class='modal-title'>Hurrah!! You got it Right</h4>");
             $(".img-responsive").replaceWith("<img src='/" + jd.gif[1] + "' class='img-responsive'>");
             $(".modal fade").show("slow").delay(5000).queue(function (n) {
               $(this).hide("slow"); n();
             });
 
 
-            // }
           }
           else {
             console.log(jd);
-            //  $(".ping").replaceWith("<button type='button' id='answerbutton' class='ting' >Answer</button> ");
-            //$(".modal-title").replaceWith("<h4 class='modal-title'>Oops! you are Wrong.</h4>");
-            // $( ".img-responsive" ).replaceWith( "<img src='"+jd.gif[0]+"' class='img-responsive'>");
+            
             $(".wrong").replaceWith("<p class='wrong'>Wrong Answer!!</p>");
             $(".wrong").show("slow").delay(3500).queue(function (n) {
               $(this).hide("slow"); n();

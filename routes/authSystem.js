@@ -3,46 +3,22 @@ const router = express.Router();
 const csrf = require("csurf");
 
 var session = require("express-session");
-var i = 0;
 
-var loginFail = 0;
+//var loginFail = 0;
 //router.use(csrfProtection);
 
 const userController = require("../Controller/userController");
 
-/* router.get("/addUserForm/", function (req, res, next) {
-    //res.locals.csrfToken = req.csrfToken()
-    next()
-},
-    userController.addUserForm
-); */
 router.post("/addUser/", function(req, res, next){
     res.locals.session = req.session;
     next()
 },
 userController.addUser);
 
-/* router.get("/login/", function (req, res, next) {
-    if (session.email)
-        res.redirect("/logged/");
-    res.locals.session = session,
-        //res.locals.csrfToken = req.csrfToken()
-    res.set({
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-    })
-    next()
-},
-    userController.loginForm
-); */
-
 router.get("/logged/", function (req, res, next) {
-    //console.log("hi");
-    //console.log(session.email);
+
     if (!req.session.email){
         res.redirect("/");
-        //session.email = "hari@gmail.com";
     }
     
     res.locals.session = req.session
@@ -58,8 +34,7 @@ router.get("/logged/", function (req, res, next) {
 
 router.post("/loginCheck/", function (req, res, next) {
     res.locals.session = req.session;
-    res.locals.session.loginFail = loginFail;
-    //res.locals.csrfToken = req.csrfToken()
+    res.locals.session.loginFail = 0;
     next();
 },
     userController.loginCheck
@@ -71,7 +46,6 @@ router.get("/logout/", function (req, res, next) {
 });
 
 router.get("/", function (req, res, next) {
-    //console.log("Login status: " + session.loginFail);
     if (req.session.email)
         res.redirect("/logged/");
     res.set({
@@ -96,6 +70,7 @@ router.post("/validateAnswer/", function (req, res, next) {
 module.exports = router;
 
 router.post("/checkEmail/", function(req, res, next){
+    //console.log(req.body.email);
     res.locals.email = req.body.email
     next()
 },
@@ -105,3 +80,7 @@ router.post("/checkEmail/", function(req, res, next){
 router.post("/logged/", function(req, res, next){
     res.redirect("/logged/");
 });
+
+router.get("/franchise/", userController.franchise);
+
+module.exports = router;

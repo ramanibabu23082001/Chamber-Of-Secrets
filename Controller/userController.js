@@ -17,7 +17,7 @@ exports.addUser = (req, res, next) => {
     user.save()
     .then(
         res.locals.session.email = email,
-        console.log("User created successfully!"),
+        //console.log("User created successfully!"),
         res.redirect("/")
     )
     .catch(err => {
@@ -36,10 +36,8 @@ exports.loginForm = (req, res, next) => {
 
 exports.loginCheck = (req, res, next) => {
     var credentials = {email: req.body.email, password: req.body.password};
-    //console.log("Login fail before is " + res.locals.loginFail);
     User.find(credentials)
     .then(user => {
-        //console.log(user);
         if(JSON.stringify(user) !== JSON.stringify([])){
             res.locals.session.loginFail = 0;
             res.locals.session.email = req.body.email;
@@ -62,7 +60,6 @@ exports.loggedPage = (req, res, next) => {
         const jsonFile = require("../JSON/question.json");
         //console.log("Welcome " + user);
         const q = jsonFile[user[0].level - 1];
-        console.log(q);
         res.render("logged", {         
             loggedUser: user,
             level: user[0].level,
@@ -76,7 +73,6 @@ exports.loggedPage = (req, res, next) => {
 
 
 exports.landingPage = (req, res, next) => {
-    console.log("Login fail value is " + res.locals.session.loginFail);
     var login_error = "";
     if(res.locals.session.loginFail === 1){
         login_error = "Incorrect username/password";
@@ -91,15 +87,15 @@ exports.landingPage = (req, res, next) => {
 
 exports.validateAnswer = (req, res, next) => {
     
-    console.log("Your email is " + res.locals.session.email);
+    //console.log("Your email is " + res.locals.session.email);
     User.findOne({email: res.locals.session.email})
     .then(user => {
-        console.log("your level is " + user.level);
+        //console.log("your level is " + user.level);
         var i = user.level - 1;
         const tex = res.locals.text;
             
         const jsonParsed = require("../JSON/question.json");
-        console.log("The answer is " + jsonParsed[i].answer);
+        //console.log("The answer is " + jsonParsed[i].answer);
         if (jsonParsed[i].answer === tex) {
                 res.json({ data: "1", path: jsonParsed[i + 1].question, number: jsonParsed[i].number, gif: jsonParsed[i].gif });
                 i = i + 1;
@@ -107,11 +103,10 @@ exports.validateAnswer = (req, res, next) => {
                 var newvalues = { $set: {level: i+1 } };
                 User.updateOne(myquery, newvalues, function(err, res){
                     if(err) throw err;
-                    console.log("Level updated");
                 });
             }
             else {
-                console.log(jsonParsed[i].gif);
+                //console.log(jsonParsed[i].gif);
                 res.json({ data: "0" });
             }
     });
@@ -122,7 +117,6 @@ exports.validateAnswer = (req, res, next) => {
 exports.checkEmail = (req, res, next) => {
     User.findOne({email: res.locals.email})
     .then(user => {
-        console.log("The user with email is " + user);
         if(user != null){
             res.json({message: "Email already exists"});
         }
@@ -130,4 +124,8 @@ exports.checkEmail = (req, res, next) => {
             res.json({message: ""});
         }
     });
+}
+
+exports.franchise = (req, res, next) => {
+    res.render("franchiseSelector");
 }
