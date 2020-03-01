@@ -2,62 +2,89 @@
     "answer": "asuran",
     "number":1,
    "question": ["/asset/one.jpg","/asset/two.jpg","/asset/virat.jpg" ],
-   "gif" :["/asset/fail1.gif","asset/success1.gif"] 
+   "gif" :["/asset/fail1.gif","/asset/success1.gif"] ,
+   "clues":["thanush","rock","aask"],
+   "time": "23:38:00"
 },
 {
     "answer": "gilli",
     "number":2,
     "question": ["/asset/first.gif","/asset/images2.jpeg","/asset/images3.jpeg" ],
-    "gif" :["/asset/fail2.gif","asset/success2.gif"] 
+    "gif" :["/asset/fail2.gif","/asset/success2.gif"] ,
+    "clues":["clue11","clue12","clue13"],
+    "time": "23:44:00"
 },
 {
     "answer": "kaithi",
     "number":3,
     "question": [ "/asset/apple.jpg","/asset/apple1.jpg","/asset/virat1.jpg"],
-    "gif" :["/asset/fail1.gif","asset/success1.gif"] 
+    "gif" :["/asset/fail1.gif","/asset/success1.gif"],
+    "clues":["clue21","clue22","clue22"],
+    "time": "23:46:00"
 
 },
 {
     "answer": "mani",
     "number":4,
-    "question": [  ]   
+    "question": [  ] ,
+    "clues":["clue31","clue32","clue32"],
+    "time": "24:00:00"
+
     
 },
 {
     "answer": "ramesh",
     "number":5,
-    "question": [ ]
-    
+    "question": [ ],
+    "clues":["clue1","clue2","clue2"],
+    "time": "10:30:00"
 
 },
 {
     "answer": "suresh",
     "number":6,
-    "question": [ ]
+    "question": [ ],
+    "clues":["clue1","clue2","clue2"],
+    "time": "12:50:00"
 
 },
 {
     "answer": "jeeva",
     "number":7,
-    "question": [ ]
-    
+    "question": [ ],
+    "clues":["clue1","clue2","clue2"],
+    "time": "23:00:00"
 },
 {
     "answer": "nagasanjay",
     "number":8,
-    "question": [ ]
+    "question": [ ],
+    "clues":["clue1","clue2","clue2"],
+    "time": "23:00:00"
    
     
 },
 {
     "answer": "abishek",
     "number":9,
-    "question": [ ]
+    "question": [ ],
+    "clues":["clue1","clue2","clue2"],
+    "time": "23:00:00"
     
 },
 {
     "answer": "kishore"  ,
     "number":10,
-    "question": [ ]
+    "question": [ ] ,
+    "clues":["clue1","clue2","clue2"],
+    "time": "23:00:00",
+ "redirect" : "/finish/"
+    }
+    ,
+    {
+        "answer": "kishoreee"  ,
+        "number":11,
+        "question": [ ] 
         }
+
 ]

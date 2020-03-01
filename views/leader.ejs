@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    </title>
+
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+   
+   <link rel="stylesheet" type="text/css" href="/css/ham.css">
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+ 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+.card {
+  
+  max-width: 150px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 10px 10px silver;
+}
+
+
+
+@media screen and (min-width: 601px) {
+  div.row {
+    font-size: 15px;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  div.row{
+    font-size: 10px;
+  }
+}
+ .card-body
+{
+	 color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+ .card-header
+{
+	 color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.card-footer
+{
+	 color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.he
+{    
+	 color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+} 
+
+img
+{
+	border-radius: 50%;
+	
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+body
+{
+	 background-color: #1A1B1E !important;
+
+}
+table
+{
+	 color: white;
+  text-shadow: 2px 2px 4px #000000;
+
+}
+.me		
+{
+		 color: #f5f5f5;
+ text-shadow: 0px -2px 4px #fff,
+ 				 0px -2px 10px #FF3,
+ 				  0px -10px 20px #F90,
+ 				   0px -20px 40px #C33;
+
+
+
+
+}
+
+#hintbutton{
+
+    width:100px;
+
+   font-size:20px;
+
+    color:black;
+
+    border: 2px solid   rgba(238,113,0,1) ;
+
+color:  white;
+
+background-color: black;
+
+border-radius:10px;
+
+padding-top:3px;
+
+padding-bottom:3px;
+
+    font-family:'Poppins', sans-serif; 
+
+    transition-duration: 0.4s;
+
+    
+}
+.blur{
+  -webkit-filter: blur(5px); /* Chrome, Safari, Opera */
+  filter: blur(5px);
+}
+#hintbutton:hover{
+
+    background: linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%);
+
+    padding-top:3px;
+
+    padding-bottom:3px;
+
+color:black;
+
+}
+#ram {
+    width: 500px;
+    margin-top: -35px;
+    
+}
+@media screen and (max-width: 600px) {
+  #ram{
+    width:300px;
+     margin-top: -35px;
+  }
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px; /*optional*/
+    color: #aaa;
+    font-size: .875em;
+}
+
+.pagination {
+    background: #f2f2f2;
+    padding: 20px;
+    margin-bottom: 20px;
+
+}
+
+.page {
+    display: inline-block;
+    padding: 0px 9px;
+    margin-right: 4px;
+    border-radius: 3px;
+    border: solid 1px #c0c0c0;
+    background: #e9e9e9;
+    box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+    font-size: .875em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #717171;
+    text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+}
+
+.page:hover, .page.gradient:hover {
+    background: #fefefe;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+    background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+}
+
+.page.active {
+    border: none;
+    background: #616161;
+    box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+    color: #f0f0f0;
+    text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+}
+
+.page.gradient {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f8f8f8), to(#e9e9e9));
+    background: -moz-linear-gradient(0% 0% 270deg,#f8f8f8, #e9e9e9);
+}
+
+.pagination.dark {
+    background:  #1A1B1E !important;
+    color: #feffff;
+}
+
+.page.dark {
+    border: solid 1px #32373b;
+    background: #3e4347;
+    box-shadow: inset 0px 1px 1px rgba(255,255,255, .1), 0px 1px 3px rgba(0,0,0, .1);
+    color: #feffff;
+    text-shadow: 0px 1px 0px rgba(0,0,0, .5);
+}
+
+.page.dark:hover, .page.dark.gradient:hover {
+    background: #3d4f5d;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#547085), to(#3d4f5d));
+    background: -moz-linear-gradient(0% 0% 270deg,#547085, #3d4f5d);
+}
+
+.page.dark.active {
+    border: none;
+    background: #2f3237;
+    box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .1);
+}
+
+.page.dark.gradient {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#565b5f), to(#3e4347));
+    background: -moz-linear-gradient(0% 0% 270deg,#565b5f, #3e4347);
+}
+a:hover
+{
+	text-decoration: none;
+}
+.he
+{
+	
+	font-size:18px;
+
+
+}
+
+</style>
+ 
+</head>
+<body>
+  <div class="menu-wrap">
+    <input type="checkbox" class="toggler">
+    <div class="hamburger"><div></div></div>
+    <div class="menu">
+      <div>
+        <div>
+          <ul>
+            <li><a href="/logged/">Home</a></li>
+            <li><a href="/leader/">Leader Board</a></li>
+            <li><a href="/developer/">Developer's Team</a></li>
+            <li><a href="/logout/">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+	<center>
+<h1 class="me">Score Board</h1></center>
+<div class="container">
+	<div class="flex-container">
+	<div class="row">
+
+<div class="col-xs-4 col-sm-4" id="first" style="display:block" >
+
+ 			<center>
+<img class="img-responsive"  style="height:60px;width:100px" src="/asset/two.png" alt="Avatar" class="avatar">
+</center>
+<div class="card" style="background: linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%);">
+ <table class="table">
+    <thead>
+      <tr >
+        <td style="height: 50px" id="twon" ></td>
+        
+      </tr>
+       <tr >
+        <td id="twol"></td>
+        
+      </tr>
+       <tr >
+        <td id="twof"></td>
+        
+      </tr>
+     
+    </thead>
+  
+
+  </table>
+  
+
+  
+</div>
+ </div>
+ <div class="col-xs-4 col-sm-4 " id="second" style="display:block;">
+ 
+ 			<center>
+<img class="img-responsive" src="/asset/one.png" alt="Avatar" style="height:60px;width:100px"class="avatar">
+</center>
+
+<div class="card" style="background: radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%);" >
+  <table class="table">
+    <thead>
+      <tr >
+        <td style="height: 50px" id="firstn" ></td>
+        
+        
+      </tr>
+       <tr >
+        <td id="firstl"></td>
+        
+      </tr>
+       <tr >
+        <td id="firstf"></td>
+        
+      </tr>
+      
+    </thead>
+  
+
+  </table>
+
+</div>
+ 
+</div>
+<div class="col-xs-4 col-sm-4" id="three" style="display:block">
+	<center>
+<img class="img-responsive" src="/asset/three.png"  style="height:60px;width:100px"alt="Avatar" class="avatar">
+</center>
+ <div class="card" style="background: linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%);">
+<table class="table">
+    <thead>
+      <tr >
+        <td style="height: 50px" id="threen" ></td>
+        
+        
+      </tr>
+       <tr ><td id="threel"></td>
+        
+      </tr>
+       <tr >
+        <td id="threef"></td>
+        
+      </tr>
+   
+    </thead>
+  
+
+  </table>
+  
+</div>
+ 
+</div>
+</div>
+
+</div>
+<br>
+<br>
+         
+  <table class="table">
+    <thead>
+      <tr style="background-color: silver">
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Team</th>
+      </tr>
+    </thead>
+  <tbody>
+    <% for (let product of prods){ %>
+  
+      <tr >
+        <td><%= product.level%></td>
+        <td><%=product.name %></td>
+        <td><%=product.level %></td>
+        <td><%=product.franchise %></td>
+      </tr>
+    <% } %>
+    
+    <tr class="he" style="background:linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%);" >
+      <td id="myr"> </td>
+      <td id="myn">  </td>
+      <td id="myl"> </td>
+      <td id="myt"> </td>
+    </tr>
+    </tbody>
+  
+  </table>
+  <center>
+    <div id="ram">
+  <section class="pagination dark">
+    <% if (currentPage !== 1 && previousPage !== 1) { %>
+        <a href="?page=1" class="page dark gradient">1</a>
+    <% } %>
+    <% if (hasPreviousPage) { %>
+        <a href="?page=<%= previousPage %>" class="page dark gradient"><%= previousPage %></a>
+    <% } %>
+    <a href="?page=<%= currentPage %>"  class="page dark active"><%= currentPage %></a>
+    <% if (hasNextPage) { %>
+        <a href="?page=<%= nextPage %>"   class="page dark gradient"><%= nextPage %></a>
+    <% } %>
+    <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+        <a href="?page=<%= lastPage %>"  class="page dark gradient"><%= lastPage %></a>
+    <% } %>
+</section>
+    </div>
+</center>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+<script>
+  $("menu-wrap").focus(function(){
+//we add the css class blur to the elements that we would like to blur on focus
+  $("container").addClass("blur");
+  $("p").addClass("blur");
+}).blur(function(){
+//we remove the blur class which will remove the blur from the elements specified when we are no longer focused on an input
+  $("h1").removeClass("blur");
+  $("p").removeClass("blur");
+});
+
+$(document).ready(function(){
+        $.ajax({ 
+          type:"get",
+          url: "/leaderthree/",
+          success: function(jd){
+           $("#firstn").replaceWith("<td style='height: 50px' id='firstn' >"+jd.onename+"</td>");
+           $("#firstl").replaceWith("<td id='firstl' >"+jd.onelevel+"</td>");
+           $("#firstf").replaceWith("<td id='firstf' >"+jd.oneteam+"</td>");
+           $("#twon").replaceWith("<td style='height: 50px' id='twon' >"+jd.twoname+"</td>");
+           $("#twol").replaceWith("<td id='twol' >"+jd.twolevel+"</td>");
+           $("#twof").replaceWith("<td id='twof' >"+jd.twoteam+" </td>");
+           $("#threen").replaceWith("<td style='height: 50px' id='threen' >"+jd.threename+"</td>");
+           $("#threel").replaceWith("<td id='threel' >"+jd.threelevel+"</td>");
+           $("#threef").replaceWith("<td id='threef' >"+jd.threeteam+" </td>");
+          
+        }
+      });
+      $.ajax({ 
+          type:"get",
+          url: "/myrank/",
+          success: function(jd){
+            console.log(jd);
+         $("#myr").replaceWith("  <td id='myr'>1 </td>");
+         $("#myn").replaceWith("  <td id=myn'> "+jd.name+"</td>");
+         $("#myl").replaceWith("  <td id='myl'> "+jd.level+"</td> ");
+         $("#myt").replaceWith("  <td id='myt'>"+jd.team+" </td>");          
+        }
+      });
+});
+
+// $(document).ready(function(){
+//         $.ajax({ 
+//           type:"get",
+//           url: "/myrank/",
+//           success: function(jd){
+//          $("myr").replaceWith("  <td id='myr'>1 </td>");
+//          $("myn").replaceWith("  <td id=myn'> "+jd.name+"</td>");
+//          $("myl").replaceWith("  <td id='myl'> "+jd.level+"</td> ");
+//          $("myt").replaceWith("  <td id='myt'>"+jd.team+" </td>");          
+//         }
+//       });
+// });
+</script>
+</html>
+
+</body>
+</html>
