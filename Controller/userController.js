@@ -32,7 +32,8 @@ exports.addUser = (req, res, next) => {
               .then(result => {
                 res.locals.session.email = email,
                 console.log("User created successfully!"),
-                res.render("franchiseSelector");
+                //res.render("franchiseSelector");
+                res.redirect("/franchise/");
                return transporter.sendMail({
                    to: email,
                    from: 'itrix@chamber_of_secrets.com',
