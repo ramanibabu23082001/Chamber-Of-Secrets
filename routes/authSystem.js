@@ -6,6 +6,7 @@ const User= require("../models/user");
 
 //var loginFail = 0;
 //router.use(csrfProtection);
+var got=0;
 
 const userController = require("../Controller/userController");
 
@@ -115,8 +116,14 @@ router.get("/logout/", function (req, res, next) {
 });
 
 router.get("/", function (req, res, next) {
-    if (req.session.email)
+    if (req.session.email&&got==0)
+    {
         res.redirect("/logged/");
+    }
+    if (req.session.email&&got==1)
+    {
+        res.redirect("/franchise/");
+    }
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
@@ -160,8 +167,11 @@ router.get("/franchise/", function(req, res, next){
     if (!req.session.email){
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
+        
     }
     res.locals.session = req.session;
+   
+    
     next();
 },
     userController.franchise);
@@ -171,6 +181,8 @@ router.post("/franchise/", function(req,res,next){
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
     }  
+    res.locals.session = req.session;
+   
     var players=req.body.play;
         var p1=players[0];
         var p2= players[1];
@@ -184,7 +196,6 @@ router.post("/franchise/", function(req,res,next){
         User.updateOne(myquery, newvalues, function(err, res){
             if(err) throw err;
         });
-
 res.redirect("/logged/");
 });
 

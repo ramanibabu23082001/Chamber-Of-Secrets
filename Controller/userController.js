@@ -157,11 +157,10 @@ exports.validateAnswer = (req, res, next) =>
     User.findOne({email: res.locals.session.email})
     .then(user => {
         console.log("your level is " + user.level);
-        var i = user.level - 1;
         const tex = res.locals.text;
         const jsonParsed = require("../JSON/question.json");
-        console.log("The answer is " + jsonParsed[i].answer);
-        if (jsonParsed[i].answer === tex) {
+        console.log("The answer is " + jsonParsed[user.level-1].answer);
+        if (jsonParsed[user.level-1].answer === tex) {
             console.log('correct'); 
             const jspl=require("../JSON/player.json");
             var num;
@@ -192,24 +191,23 @@ exports.validateAnswer = (req, res, next) =>
                         gifPath=jspl[k].gif[user.player3];      
                         console.log(gifPath);  
             //form
-            if(i==9)
+            if(user.level==10)
             {
-                res.json({ data: "1",number: jsonParsed[i+1].number,redirect:jsonParsed[i].redirect });
-                i = i + 1;
+                res.json({ data: "1",number: jsonParsed[user.level-1].number,redirect:jsonParsed[user.level-1].redirect });
                 var myquery = { email: res.locals.session.email };
-                var newvalues = { $set: {level: i+1 } };
+                var newvalues = { $set: {level: user.level+1 } };
                 User.updateOne(myquery, newvalues, function(err, res){
                     if(err) throw err;
                     console.log("Level updated");
                 });
             }
-            else if(i!=9)
+            else if((user.level-1)!=9)
             {
                 console.log("not 10");
-                res.json({ data: "1", path: jsonParsed[i + 1].question,level :jsonParsed[i+1].number, number:jsonParsed[i+1].number,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
-                i = i + 1;
+                res.json({ data: "1", path: jsonParsed[user.level].question,level :user.level+1, number:user.level+1,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
+
                 var myquery = { email: res.locals.session.email};
-                var newvalues = { $set: {level: i+1,updated_at:Date.now() } };
+                var newvalues = { $set: {level: user.level+1,updated_at:Date.now() } };
                 User.updateOne(myquery, newvalues, function(err, res){
                     if(err) throw err;
                     console.log("Level updated");
@@ -217,7 +215,7 @@ exports.validateAnswer = (req, res, next) =>
             }
             }
             else {
-                console.log(jsonParsed[i].gif);
+                console.log(jsonParsed[user.level-1].gif);
                 res.json({ data: "0" });
             }  //to
     });

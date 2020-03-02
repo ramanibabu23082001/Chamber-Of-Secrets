@@ -442,8 +442,8 @@ $('#answerbutton').on('click', function () {
             $(".third").replaceWith("<img src='" + jd.path[1] + "' class='third'>");
             $("#my").val('');
 
-            $("#levelno").text("🏆 " + (jd.number + 1));
-            $("#compeletedLevel").text("Level " +jd.level+ " 🆙");
+            $("#levelno").replaceWith("<p id='levelno'>🏆"+ jd.number+"</p>");
+                                 $("#compeletedLevel").text("Level " +jd.level+ " 🆙");  
             $(".match").replaceWith(" <div class='match'>😎 "+jd.curTeam.team+" 🆚 "+jd.oppTeam.team+" 🤖</div>");
                                $("#you").replaceWith(" <img src='"+jd.curTeam.pla_photo[0]+"' alt='' id='you' style='width: 90%; height:90%'>");
                                $("#opp").replaceWith(" <img src='"+jd.oppTeam.pla_photo[0]+"' alt='' id='opp' style='width: 90%; height:90%'>");

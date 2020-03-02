@@ -284,7 +284,7 @@ a:hover
  			<center>
 <img class="img-responsive"  style="height:60px;width:100px" src="/asset/two.png" alt="Avatar" class="avatar">
 </center>
-<div class="card" style="background: linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%);">
+<div class="card" id="2" >
  <table class="table">
     <thead>
       <tr >
@@ -315,7 +315,7 @@ a:hover
 <img class="img-responsive" src="/asset/one.png" alt="Avatar" style="height:60px;width:100px"class="avatar">
 </center>
 
-<div class="card" style="background: radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%);" >
+<div class="card"  id="1"  >
   <table class="table">
     <thead>
       <tr >
@@ -344,7 +344,7 @@ a:hover
 	<center>
 <img class="img-responsive" src="/asset/three.png"  style="height:60px;width:100px"alt="Avatar" class="avatar">
 </center>
- <div class="card" style="background: linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%);">
+ <div class="card" id="3" >
 <table class="table">
     <thead>
       <tr >
@@ -384,17 +384,16 @@ a:hover
       </tr>
     </thead>
   <tbody>
-    <% for (let product of prods){ %>
-  
+    <%for (var i=0;i < prods.length;i++){ %>
       <tr >
-        <td><%= product.level%></td>
-        <td><%=product.name %></td>
-        <td><%=product.level %></td>
-        <td><%=product.franchise %></td>
+        <td><%= i+1%></td>
+        <td><%=prods[i].name %></td>
+        <td><%=prods[i].level %></td>
+        <td><%=prods[i].franchise %></td>
       </tr>
     <% } %>
     
-    <tr class="he" style="background:linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%);" >
+    <tr class="he" id="4"  >
       <td id="myr"> </td>
       <td id="myn">  </td>
       <td id="myl"> </td>
@@ -404,7 +403,7 @@ a:hover
   
   </table>
   <center>
-    <div id="ram">
+    <div id="ram">  
   <section class="pagination dark">
     <% if (currentPage !== 1 && previousPage !== 1) { %>
         <a href="?page=1" class="page dark gradient">1</a>
@@ -442,6 +441,62 @@ $(document).ready(function(){
           type:"get",
           url: "/leaderthree/",
           success: function(jd){
+            var team1 =jd.oneteam;
+            switch(team1)
+            {
+                case "kkr" :
+                  document.getElementById('1').style.background ='linear-gradient(83deg, rgba(133,85,196,1) 0%, rgba(64,10,136,1) 49%, rgba(50,7,107,1) 100%)';                  break;
+                case "rcb" :
+                  document.getElementById('1').style.background = 'linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%)';
+                break;
+                case "csk" :
+                  document.getElementById('1').style.background = 'linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%)';
+                 break;
+                case "srh" :
+                  document.getElementById('1').style.background = 'linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%)';
+                 break;
+                case "mi" :
+                  document.getElementById('1').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
+                 break;
+            }
+            var team2 =jd.twoteam;
+            switch(team2)
+            {
+              case "kkr" :
+                  document.getElementById('2').style.background = 'linear-gradient(83deg, rgba(133,85,196,1) 0%, rgba(64,10,136,1) 49%, rgba(50,7,107,1) 100%)';
+                  break;
+                case "rcb" :
+                  document.getElementById('2').style.background = 'linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%)';
+                break;
+                case "csk" :
+                  document.getElementById('2').style.background = 'linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%)';
+                 break;
+                case "srh" :
+                  document.getElementById('2').style.background = 'linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%)';
+                 break;
+                case "mi" :
+                  document.getElementById('2').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
+                 break;
+            }
+            var team3 =jd.threeteam;
+            switch(team3)
+            {    
+                     case "kkr" :
+                  document.getElementById('3').style.background = 'linear-gradient(83deg, rgba(133,85,196,1) 0%, rgba(64,10,136,1) 49%, rgba(50,7,107,1) 100%)';
+                  break;
+                case "rcb" :
+                  document.getElementById('3').style.background = 'linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%)';
+                break;
+                case "csk" :
+                  document.getElementById('3').style.background = 'linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%)';
+                 break;
+                case "srh" :
+                  document.getElementById('3').style.background = 'linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%)';
+                 break;
+                case "mi" :
+                  document.getElementById('3').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
+                 break;
+            }
            $("#firstn").replaceWith("<td style='height: 50px' id='firstn' >"+jd.onename+"</td>");
            $("#firstl").replaceWith("<td id='firstl' >"+jd.onelevel+"</td>");
            $("#firstf").replaceWith("<td id='firstf' >"+jd.oneteam+"</td>");
@@ -459,7 +514,26 @@ $(document).ready(function(){
           url: "/myrank/",
           success: function(jd){
             console.log(jd);
-         $("#myr").replaceWith("  <td id='myr'>1 </td>");
+            var team= jd.team
+            switch(team)
+            {    
+                     case "kkr" :
+                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(133,85,196,1) 0%, rgba(64,10,136,1) 49%, rgba(50,7,107,1) 100%)';
+                  break;
+                case "rcb" :
+                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%)';
+                break;
+                case "csk" :
+                  document.getElementById('4').style.background = 'linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%)';
+                 break;
+                case "srh" :
+                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%)';
+                 break;
+                case "mi" :
+                  document.getElementById('4').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
+                 break;
+            }
+         $("#myr").replaceWith("  <td id='myr'></td>");
          $("#myn").replaceWith("  <td id=myn'> "+jd.name+"</td>");
          $("#myl").replaceWith("  <td id='myl'> "+jd.level+"</td> ");
          $("#myt").replaceWith("  <td id='myt'>"+jd.team+" </td>");          
