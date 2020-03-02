@@ -201,7 +201,7 @@ exports.validateAnswer = (req, res, next) =>
                     console.log("Level updated");
                 });
             }
-            else if((user.level-1)!=9)
+            else if(user.level!=10)
             {
                 console.log("not 10");
                 res.json({ data: "1", path: jsonParsed[user.level].question,level :user.level+1, number:user.level+1,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
@@ -283,6 +283,7 @@ exports.leader =(req,res,next)=>
           pagetitle: 'leaderboard',
           mail:email,
           currentPage: page,
+          count:((page-1)*5)+3,
           hasNextPage: ITEMS_PER_PAGE * page < totalItems,
           hasPreviousPage: page > 1,
           nextPage: page + 1,

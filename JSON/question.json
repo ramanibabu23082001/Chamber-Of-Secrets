@@ -17,7 +17,7 @@
 {
     "answer": "kaithi",
     "number":3,
-    "question": [ "/asset/apple.jpg","/asset/apple1.jpg","/asset/virat1.jpg"],
+    "question": [ "/asset/csk1.png","/asset/csk2.png","/asset/virat1.jpg"],
     "gif" :["/asset/fail1.gif","/asset/success1.gif"],
     "clues":["clue21","clue22","clue22"],
     "time": "23:46:00"
@@ -26,7 +26,7 @@
 {
     "answer": "mani",
     "number":4,
-    "question": [  ] ,
+    "question": [ "/asset/users/user1","/asset/users/user2","/asset/users/user3" ] ,
     "clues":["clue31","clue32","clue32"],
     "time": "24:00:00"
 
@@ -35,7 +35,7 @@
 {
     "answer": "ramesh",
     "number":5,
-    "question": [ ],
+    "question": [ "/asset/users/user4","/asset/users/user5","/asset/users/user6"],
     "clues":["clue1","clue2","clue2"],
     "time": "10:30:00"
 
@@ -43,7 +43,7 @@
 {
     "answer": "suresh",
     "number":6,
-    "question": [ ],
+    "question": [ "/asset/users/user7","/asset/users/user8","/asset/users/user1"],
     "clues":["clue1","clue2","clue2"],
     "time": "12:50:00"
 
@@ -51,14 +51,14 @@
 {
     "answer": "jeeva",
     "number":7,
-    "question": [ ],
+    "question": [ "/asset/csk3.png","/asset/csk4.png","/asset/csk5.png"],
     "clues":["clue1","clue2","clue2"],
     "time": "23:00:00"
 },
 {
     "answer": "nagasanjay",
     "number":8,
-    "question": [ ],
+    "question": [ "/asset/mi1.png","/asset/mi2.png","/asset/mi3.png" ],
     "clues":["clue1","clue2","clue2"],
     "time": "23:00:00"
    
@@ -67,7 +67,7 @@
 {
     "answer": "abishek",
     "number":9,
-    "question": [ ],
+    "question": [ "/asset/mi4.png","/asset/mi5.png","/asset/srh1.png" ],
     "clues":["clue1","clue2","clue2"],
     "time": "23:00:00"
     
@@ -75,7 +75,7 @@
 {
     "answer": "kishore"  ,
     "number":10,
-    "question": [ ] ,
+    "question": [ "/asset/srh2.png","/asset/srh3.png","/asset/srh4.png" ] ,
     "clues":["clue1","clue2","clue2"],
     "time": "23:00:00",
  "redirect" : "/finish/"

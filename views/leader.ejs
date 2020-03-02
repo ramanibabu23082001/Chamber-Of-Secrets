@@ -386,12 +386,13 @@ a:hover
   <tbody>
     <%for (var i=0;i < prods.length;i++){ %>
       <tr >
-        <td><%= i+1%></td>
+        <td><%= count+1%></td>
         <td><%=prods[i].name %></td>
         <td><%=prods[i].level %></td>
         <td><%=prods[i].franchise %></td>
       </tr>
-    <% } %>
+    <% count++;
+   } %>
     
     <tr class="he" id="4"  >
       <td id="myr"> </td>
@@ -533,7 +534,7 @@ $(document).ready(function(){
                   document.getElementById('4').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
                  break;
             }
-         $("#myr").replaceWith("  <td id='myr'></td>");
+         $("#myr").replaceWith("  <td id='myr'>1</td>");
          $("#myn").replaceWith("  <td id=myn'> "+jd.name+"</td>");
          $("#myl").replaceWith("  <td id='myl'> "+jd.level+"</td> ");
          $("#myt").replaceWith("  <td id='myt'>"+jd.team+" </td>");          

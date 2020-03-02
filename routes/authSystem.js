@@ -6,12 +6,16 @@ const User= require("../models/user");
 
 //var loginFail = 0;
 //router.use(csrfProtection);
-var got=0;
 
 const userController = require("../Controller/userController");
 
 router.post("/addUser/", function(req, res, next){
     res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
 },
 userController.addUser);
@@ -22,6 +26,11 @@ router.get("/leader/", function(req, res, next){
         res.redirect("/");
     }
     res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
 },
 userController.leader);
@@ -40,6 +49,11 @@ router.get("/developer/", function(req, res, next){
         res.redirect("/");
     }
     res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
 },
 userController.develop);
@@ -76,6 +90,11 @@ router.get("/finish/", function(req, res, next){
         res.redirect("/");
     }
     res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
 },
 userController.finish);
@@ -107,23 +126,45 @@ router.post("/loginCheck/", function (req, res, next) {
 );
 
 router.get("/logout/", function (req, res, next) {
-    if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
-        res.redirect("/");
-    }
     req.session.email = null;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    });
     res.redirect("/");
 });
 
 router.get("/", function (req, res, next) {
-    if (req.session.email&&got==0)
-    {
-        res.redirect("/logged/");
-    }
-    if (req.session.email&&got==1)
-    {
-        res.redirect("/franchise/");
-    }
+      
+if(req.session.email)
+{
+     
+    console.log('asdfas');
+    User.findOne({email:req.session.email})
+ .then(user=>{
+
+         console.log("seesion")
+         if(user.franchise==null)
+         {
+          console.log("fran");  
+         res.redirect("/franchise/");
+         }
+         else if(user.player1==null)
+         {
+             console.log("player");
+             res.redirect("/addPlayer/");
+         }
+         else
+        { console.log("loh");
+         res.redirect("/logged/");
+     }
+    })
+     .catch(err=>
+        {
+       console.log(err);
+        }); 
+}  
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
@@ -136,7 +177,7 @@ router.get("/", function (req, res, next) {
 );
 
 router.post("/validateAnswer/", function (req, res, next) {
-    if (!req.session.email){
+   if (!req.session.email){
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
     }
@@ -151,6 +192,7 @@ router.post("/validateAnswer/", function (req, res, next) {
 
 router.post("/checkEmail/", function(req, res, next){
     //console.log(req.body.email);
+    
     res.locals.email = req.body.email
     next()
 },
@@ -158,7 +200,10 @@ router.post("/checkEmail/", function(req, res, next){
 );
 
 router.post("/logged/", function(req, res, next){
-
+    if (!req.session.email){
+        //req.session.email = "hari@gmail.com";
+        res.redirect("/");
+    }
     res.redirect("/logged/");
 });
 
@@ -167,22 +212,24 @@ router.get("/franchise/", function(req, res, next){
     if (!req.session.email){
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
-        
     }
     res.locals.session = req.session;
-   
-    
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next();
 },
     userController.franchise);
 
+
+    
 router.post("/franchise/", function(req,res,next){
     if (!req.session.email){
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
     }  
-    res.locals.session = req.session;
-   
     var players=req.body.play;
         var p1=players[0];
         var p2= players[1];
@@ -196,6 +243,7 @@ router.post("/franchise/", function(req,res,next){
         User.updateOne(myquery, newvalues, function(err, res){
             if(err) throw err;
         });
+
 res.redirect("/logged/");
 });
 
@@ -208,6 +256,11 @@ router.post("/addFranchise/", function(req, res, next){
     console.log("The email is " + req.session.email);
     res.locals.email = req.session.email;
     res.locals.franchise = req.body.franchise;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next();
 },
 userController.addFranchise
