@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 }));
 const ITEMS_PER_PAGE = 5;
 
+
 exports.addUserForm = (req, res, next) => {
     res.render('addUserForm', {
         //csrfToken: res.locals.csrfToken
@@ -33,6 +34,10 @@ exports.addUser = (req, res, next) => {
                 res.locals.session.email = email,
                 console.log("User created successfully!"),
                 //res.render("franchiseSelector");
+                res.setHeader(
+                    "Access-Control-Allow-Methods",
+                    "GET, POST, PATCH, DELETE, OPTIONS"
+                  );
                 res.redirect("/franchise/");
                return transporter.sendMail({
                    to: email,
@@ -105,7 +110,11 @@ exports.loggedPage = (req, res, next) => {
        if(user[0].level==11)
         {
             console.log('asdf');
-             res.redirect('/finish');
+            res.setHeader(
+                "Access-Control-Allow-Methods",
+                "GET, POST, PATCH, DELETE, OPTIONS"
+              );
+            res.redirect('/finish');
         }
         else
         {
@@ -124,20 +133,48 @@ exports.loggedPage = (req, res, next) => {
 };
 
 exports.landingPage = (req, res, next) => {
-    console.log("Login fail value is " + res.locals.session.loginFail);
-    var login_error = "";
-    if(res.locals.session.loginFail === 1){
-        login_error = "Incorrect username/password";
-    }
-    res.render("landingPage", {
-        //csrfToken: res.locals.csrfToken
-        loginFail: res.locals.session.loginFail,
-        login_error: login_error
-    });
-    res.locals.session.loginFail = 0;
+
+    console.log('asdfas');
+    User.findOne({email:req.session.email})
+ .then(user=>{
+         console.log(user);
+         console.log("seesion")
+         if(req.session.email)
+{
+         if(user.franchise==null&&user.player1==null)
+         
+          console.log("fran");
+         
+          res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+          );
+          res.redirect("/franchise/");
+         
+        
+}
+         else
+        { 
+            console.log("Login fail value is " + res.locals.session.loginFail);
+            var login_error = "";
+            if(res.locals.session.loginFail === 1){
+                login_error = "Incorrect username/password";
+            }
+            res.render("landingPage", {
+                //csrfToken: res.locals.csrfToken
+                loginFail: res.locals.session.loginFail,
+                login_error: login_error
+            });
+            res.locals.session.loginFail = 0;
+     }
+    })
+     .catch(err=>
+        {
+       console.log(err);
+        }); 
 }
 //from
-exports.findhint = (req, res, next) => {
+exports.findtime = (req, res, next) => {
 
     User.findOne({email: res.locals.session.email})
     .then(user => {
@@ -145,13 +182,40 @@ exports.findhint = (req, res, next) => {
         var i = user.level - 1;    
         const jsonParsed = require("../JSON/hint.json");
         //console.log("the time is " + jsonParsed[i].ht1 + jsonParsed[i].ht2 +jsonParsed[i].ht3);
-        console.log(jsonParsed[i]);
-        res.json({hint1: jsonParsed[i].hint1, hint2: jsonParsed[i].hint2, hint3: jsonParsed[i].hint3,ht1:jsonParsed[i].ht1,ht2:jsonParsed[i].ht2,ht3:jsonParsed[i].ht3 });
+        //console.log(jsonParsed[i]);
+        res.json({ht1:jsonParsed[i].ht1,ht2:jsonParsed[i].ht2,ht3:jsonParsed[i].ht3 });
                 
          });
 
+}
+
+exports.findhint = (req, res, next) => {
+
+    User.findOne({email: res.locals.session.email})
+    .then(user => {
+        const num = res.locals.num;
+        //console.log("your level is " + user.level);
+        var i = user.level - 1;    
+        const jsonParsed = require("../JSON/hint.json");
+        //console.log("the time is " + jsonParsed[i].ht1 + jsonParsed[i].ht2 +jsonParsed[i].ht3);
+        console.log('user controller ok');
+        if(num==1)
+        {
+            res.json({hint1: jsonParsed[i].hint1 });
+        }
+        else if(num==2)
+        {
+            res.json({hint2: jsonParsed[i].hint2 });
+        }
+        else
+        {
+            res.json({hint3: jsonParsed[i].hint3 });
         }
         
+                
+         });
+
+}        
 exports.validateAnswer = (req, res, next) =>
 {
     console.log("Your email is " + res.locals.session.email);
@@ -194,7 +258,7 @@ exports.validateAnswer = (req, res, next) =>
             //form
             if(user.level==10)
             {
-                res.json({ data: "1",number: jsonParsed[user.level-1].number,redirect:jsonParsed[user.level-1].redirect });
+                res.json({ data: "1",num: 10,redirect:jsonParsed[user.level-1].redirect });
                 var myquery = { email: res.locals.session.email };
                 var newvalues = { $set: {level: user.level+1 } };
                 User.updateOne(myquery, newvalues, function(err, res){
@@ -205,7 +269,7 @@ exports.validateAnswer = (req, res, next) =>
             else if(user.level!=10)
             {
                 console.log("not 10");
-                res.json({ data: "1", path: jsonParsed[user.level].question,level :user.level+1, number:user.level+1,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
+                res.json({ data: "1",num:1, path: jsonParsed[user.level].question,level :user.level+1, number:user.level+1,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
 
                 var myquery = { email: res.locals.session.email};
                 var newvalues = { $set: {level: user.level+1,updated_at:Date.now() } };
@@ -263,9 +327,34 @@ exports.myrank=(req,res,next)=>
         })
      .catch(err=>
         {
-       console.log(err);
+              console.log(err);
         });   
 }
+exports.myrankee=(req,res,next)=>
+{
+    console.log('myrankee');
+    User.find().sort([["level","descending"],["updated_at","ascending"]])
+    .then(users=>
+        {
+            let i=0;
+            var number=0;
+            var teame;
+            for(i=0;i<users.length;i++)
+            {
+                if(users[i].email==res.locals.session.email)
+                {
+                    number=i+1+3;
+                    teame= users[i].franchise;
+                }
+            }
+            res.json({num:number,team:teame});
+        })
+     .catch(err=>
+        {
+              console.log(err);
+        });   
+}
+
 exports.leader =(req,res,next)=>
 {
   var email= res.locals.session.email 
@@ -350,20 +439,26 @@ exports.addFranchise= (req,res,next)=>{
         for(i=0;i<5;i++)
         if (jsonParsed[i].team === tex) {
                 res.json({ data: "1",team: jsonParsed[i].team_name,pla_name: jsonParsed[i].pla_name,pla_photo:jsonParsed[i].pla_photo});
-            }
-         
+            }         
 }
 
 exports.franchise = (req, res, next) => {
-    // const fs = require("fs");
-    // const jsonData = require("../JSON/franchises.json");
-    // var i = 0;
-    // for(i = 0; i < jsonData.length; i++){
-    //     if(jsonData[i].email === res.locals.session.email){
-    //         break;
-    //     }
-    // }
-    // console.log("I value is "+ i);
-    // console.log("JSON length is " + jsonData.length);
-    res.render("franchiseSelector");
+    if(req.session.email)
+    {
+        User.findOne({email:req.session.email})
+        .then(user=>
+            {
+                if(user.franchise!=null&&user.player1!=null)
+                {
+                    res.redirect("/logged");
+                }
+                else{
+                    res.render("franchiseSelector");
+                }
+            })
+            .catch(err=>
+            {
+             console.log(err);
+            })
+    }
 }

@@ -534,10 +534,36 @@ $(document).ready(function(){
                   document.getElementById('4').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
                  break;
             }
-         $("#myr").replaceWith("  <td id='myr'>1</td>");
          $("#myn").replaceWith("  <td id=myn'> "+jd.name+"</td>");
          $("#myl").replaceWith("  <td id='myl'> "+jd.level+"</td> ");
          $("#myt").replaceWith("  <td id='myt'>"+jd.team+" </td>");          
+        }
+      });
+      $.ajax({ 
+          type:"get",
+          url: "/myrankee/",
+          success: function(jd){
+            console.log(jd);
+            var team= jd.team;
+            switch(team)
+            {    
+                     case "kkr" :
+                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(133,85,196,1) 0%, rgba(64,10,136,1) 49%, rgba(50,7,107,1) 100%)';
+                  break;
+                case "rcb" :
+                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%)';
+                break;
+                case "csk" :
+                  document.getElementById('4').style.background = 'linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%)';
+                 break;
+                case "srh" :
+                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%)';
+                 break;
+                case "mi" :
+                  document.getElementById('4').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
+                 break;
+            }
+         $("#myr").replaceWith("  <td id='myr'>"+jd.num+"</td>");         
         }
       });
 });

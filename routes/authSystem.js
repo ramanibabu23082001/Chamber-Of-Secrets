@@ -34,12 +34,32 @@ router.get("/leader/", function(req, res, next){
     next()
 },
 userController.leader);
+
+router.get("/myrankee/", function(req, res, next){
+    if (!req.session.email){
+        //req.session.email = "hari@gmail.com";
+        res.redirect("/");
+    }
+    res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
+    next()
+},
+userController.myrankee);
 router.get("/leaderthree/", function(req, res, next){
     if (!req.session.email){
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
     }
     res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
 },
 userController.leaderthree);
@@ -58,14 +78,30 @@ router.get("/developer/", function(req, res, next){
 },
 userController.develop);
 //from
-router.post("/findhint/", function (req, res, next) {
-    if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
-        res.redirect("/");
-    }
+router.post("/findtime/", function (req, res, next) {
     res.locals.session = req.session
+   res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
+ },
+     userController.findtime
+ );
 
+
+ router.post("/findhint/", function (req, res, next) {
+     console.log('auth ook');
+    res.locals.session = req.session
+    
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
+    res.locals.num = req.body.num
+    next()
  },
      userController.findhint
  );
@@ -76,6 +112,11 @@ router.post("/findhint/", function (req, res, next) {
         res.redirect("/");
     }
     res.locals.session = req.session
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
     next()
 
  },
@@ -136,35 +177,7 @@ router.get("/logout/", function (req, res, next) {
 });
 
 router.get("/", function (req, res, next) {
-      
-if(req.session.email)
-{
-     
-    console.log('asdfas');
-    User.findOne({email:req.session.email})
- .then(user=>{
-
-         console.log("seesion")
-         if(user.franchise==null)
-         {
-          console.log("fran");  
-         res.redirect("/franchise/");
-         }
-         else if(user.player1==null)
-         {
-             console.log("player");
-             res.redirect("/addPlayer/");
-         }
-         else
-        { console.log("loh");
-         res.redirect("/logged/");
-     }
-    })
-     .catch(err=>
-        {
-       console.log(err);
-        }); 
-}  
+ 
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
@@ -187,9 +200,6 @@ router.post("/validateAnswer/", function (req, res, next) {
 },
     userController.validateAnswer
 );
-
-
-
 router.post("/checkEmail/", function(req, res, next){
     //console.log(req.body.email);
     
@@ -209,6 +219,7 @@ router.post("/logged/", function(req, res, next){
 
 
 router.get("/franchise/", function(req, res, next){
+    console.log("frans");
     if (!req.session.email){
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
@@ -226,7 +237,9 @@ router.get("/franchise/", function(req, res, next){
 
     
 router.post("/franchise/", function(req,res,next){
-    if (!req.session.email){
+   
+    if(!req.session.email)
+    {
         //req.session.email = "hari@gmail.com";
         res.redirect("/");
     }  
@@ -243,7 +256,12 @@ router.post("/franchise/", function(req,res,next){
         User.updateOne(myquery, newvalues, function(err, res){
             if(err) throw err;
         });
-
+        res.locals.session = req.session;
+        res.set({
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+        })
 res.redirect("/logged/");
 });
 
@@ -275,6 +293,12 @@ router.post("/addPlayer/",function(req,res,next){
     res.locals.pla1=req.body.pl1;
     res.locals.pla2=req.body.pl2;
     res.locals.pla3=req.body.pl3;
+    res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
 },userController.addPlayer);
 
 

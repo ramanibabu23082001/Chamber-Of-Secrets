@@ -20,7 +20,7 @@
 	"team":"srh",
 	"pla_name":["David Warner","Kane Williamson","Rashid khan","Bhuvaneshar kumar","Manish Pandey"],
 	"pla_photo":["/asset/srh2.png","/asset/srh1.png","/asset/srh3.png","/asset/srh4.png","/asset/srh5.png"],
-	"gif":["/asset/warner.gif","/asset/srh2.gif","/asset/srh3.gif","/asset/srh4.gif","/asset/srh5.gif"]
+	"gif":["/asset/srh1.gif","/asset/srh2.gif","/asset/srh3.gif","/asset/srh4.gif","/asset/srh5.gif"]
 },
 {	"team_name":"Mumbai Indians",
 	"team":"mi",

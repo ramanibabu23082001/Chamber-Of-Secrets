@@ -343,8 +343,7 @@ margin: 40px 0px 20px;
 
                                  }
     });
-    $('#my').keypress(function(event){
-                   
+    $('#my').keypress(function(event){               
                    var text = document.getElementById("my").value;
                    var texte = text.toLowerCase().replace(/\s/g,'');
                    var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -360,7 +359,7 @@ margin: 40px 0px 20px;
                               {
                                   console.log(jd.path);
                             
-                                 if(jd.number==10)
+                                 if(jd.num==10)
                                  {
                                     preventBack();
                                   window.location.href = jd.redirect;
@@ -428,45 +427,51 @@ $('#answerbutton').on('click', function () {
 
           if (jd.data == "1") {
             
-            if(jd.number==10){
+            if(jd.num==10){
                    preventBack();                            
                    window.location.href = jd.redirect;
-                                  ('#fini').hide();
+
                                  } 
                                  else{  
-            $(".wrong").replaceWith("<p class='wrong'></p>");
-            jQuery("#myModal").modal('toggle');
-
-            $(".first").replaceWith("<img src='" + jd.path[0] + "' class='first'>");
-            $(".second").replaceWith("<img src='" + jd.path[1] + "' class='second'>");
-            $(".third").replaceWith("<img src='" + jd.path[1] + "' class='third'>");
-            $("#my").val('');
-
-            $("#levelno").replaceWith("<p id='levelno'>🏆"+ jd.number+"</p>");
+                                  jQuery("#myModal").modal('toggle');
+                                 $("#level-pop").replaceWith("<h1 id='level-pop'>Level " + jd.number +" 🆙</h1>");
+                                 $(".first").replaceWith("<img src='"+jd.path[0]+"' class='first'>");
+                              $(".second").replaceWith("<img src='"+jd.path[1]+"' class='second'>");
+                               $(".third").replaceWith("<img src='"+jd.path[2]+"' class='third'>");
+                                 $("#my").val('');
+                                 $("#levelno").replaceWith("<p id='levelno'>🏆"+ jd.number+"</p>");
                                  $("#compeletedLevel").text("Level " +jd.level+ " 🆙");  
-            $(".match").replaceWith(" <div class='match'>😎 "+jd.curTeam.team+" 🆚 "+jd.oppTeam.team+" 🤖</div>");
+       
+                               $( ".img-responsive").replaceWith( "<img src='"+jd.gif+"' class='img-responsive'>");
+                               $(".match").replaceWith(" <div class='match'>😎 "+jd.curTeam.team+" 🆚 "+jd.oppTeam.team+" 🤖</div>");
                                $("#you").replaceWith(" <img src='"+jd.curTeam.pla_photo[0]+"' alt='' id='you' style='width: 90%; height:90%'>");
                                $("#opp").replaceWith(" <img src='"+jd.oppTeam.pla_photo[0]+"' alt='' id='opp' style='width: 90%; height:90%'>");
-            $(".img-responsive").replaceWith("<img src='/" + jd.gif + "' class='img-responsive'>");
-            $(".modal fade").show("slow").delay(5000).queue(function (n) {
-              $(this).hide("slow"); n();
-            });
+                                  $(".modal fade").show("slow").delay(5000).queue(function(n) {
+                                 $(this).hide("slow");n(); 
+                               });
 
                                  }
           }
           else if(jd.data=='0') {
-            console.log(jd);
-            
-            $(".wrong").replaceWith("<p class='wrong'>Wrong Answer!!</p>");
-            $(".wrong").show("slow").delay(3500).queue(function (n) {
-              $(this).hide("slow"); n();
-            });
+                 console.log(jd);
+                           $(".wrong").replaceWith("<p class='wrong'>Wrong Answer!!</p>");
+                              $(".wrong").show("slow").delay(3500).queue(function(n) {
+                                 $(this).hide("slow");n();
+                               });
+          
           }
 
         }
       });
     });
    
+    
+      function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+  </script>
+  <script>
+    
     // Get the modal
     var modal = document.getElementById("hintmodel");
     
@@ -503,21 +508,26 @@ $('#answerbutton').on('click', function () {
 
     $('#hintbutton').on('click', function () {
 
+      var counta=0;
+      var countb=0;
+      var countc=0;
+
     $.ajax({
         type: "post",
-        url: '/findhint/',
+        url: '/findtime/',
         success: function (jd) {
 
-    var counta=jd.ht1;
-    var countb=jd.ht2;
-    var countc=jd.ht3;
+     counta=jd.ht1;
+     countb=jd.ht2;
+     countc=jd.ht3;
     
+        }});
     var a="uuu";
     var b="vvv";
     var c="www";
-    var hint1=jd.hint1;
-    var hint2=jd.hint2;
-    var hint3=jd.hint3;
+    // var hint1=jd.hint1;
+    // var hint2=jd.hint2;
+    // var hint3=jd.hint3;
 
     var distance1=1;
     var distance2=1;
@@ -537,12 +547,26 @@ $('#answerbutton').on('click', function () {
       var hours = Math.floor((distance1 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance1 % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance1 % (1000 * 60)) / 1000);
-       document.getElementById("uuu").innerHTML = "Hint will be available in " + days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+      
     
       if (distance1 < 0) {
-        document.getElementById("uuu").innerHTML=hint1;
+        console.log('varuthu');
+        var no=1;
+        var num;
+    $.ajax({
+        
+        type: "post",
+        url: '/findhint/',
+        data:{num:no},
+        success: function (ab) { 
+          document.getElementById("uuu").innerHTML=ab.hint1;
+        }});
+        
          clearInterval(x);
+        }
+        else{
+          document.getElementById("uuu").innerHTML = "Hint will be available in " + days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
         }
     }
 
@@ -556,12 +580,23 @@ $('#answerbutton').on('click', function () {
       var hours = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance2 % (1000 * 60)) / 1000);
-       document.getElementById("vvv").innerHTML = "Hint will be available in " + days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+    
     
       if (distance2 < 0) {
-        document.getElementById("vvv").innerHTML=hint2;
+        var num;
+        var no=2;
+        $.ajax({
+        type: "post",
+        url: '/findhint/',
+        data:{ num : no },
+        success: function (cd) { 
+          document.getElementById("vvv").innerHTML=cd.hint2;
+        }});
          clearInterval(y);
+        }
+        else{
+          document.getElementById("vvv").innerHTML = "Hint will be available in " + days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
         }
     }
 
@@ -575,23 +610,29 @@ $('#answerbutton').on('click', function () {
       var hours = Math.floor((distance3 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance3 % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance3 % (1000 * 60)) / 1000);
-       document.getElementById("www").innerHTML = "Hint will be available in " + days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+
     
       if (distance3 < 0) {
-        document.getElementById("www").innerHTML=hint3;
+        var num;
+        var no=3;
+        $.ajax({
+        type: "post",
+        url: '/findhint/',
+        data:{ num : no },
+        success: function (ef) { 
+          document.getElementById("www").innerHTML=ef.hint3;
+        }});
          clearInterval(z);
         }
-    }
-          }
-      });
- 
-    });
+        else{
+          document.getElementById("www").innerHTML = "Hint will be available in " + days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+        }
+    } });
 
-      function preventBack() { window.history.forward(); }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
-  </script>
+        
+    </script>
+
 </body>
 
 </html>

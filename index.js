@@ -21,4 +21,4 @@ app.use(express.static(path.join(__dirname, 'views')));
 //to
 app.set("view engine", "ejs");
 app.use(authRouter);
-app.listen(3001);
+app.listen(3000);
