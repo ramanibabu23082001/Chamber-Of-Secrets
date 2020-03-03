@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 
     }
 }));
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 8;
 
 
 exports.addUserForm = (req, res, next) => {
@@ -55,7 +55,7 @@ exports.addUser = (req, res, next) => {
 //to
 exports.loginForm = (req, res, next) => {
     if(res.locals.session.email)
-        res.redirect("/logged/");
+        res.redirect("/");
     res.render("loginForm", {
         message: ""
         //csrfToken: res.locals.csrfToken
@@ -80,7 +80,7 @@ exports.loginCheck = (req, res, next) => {
                 if(doMatch){
                     res.locals.session.loginFail = 0;
                     res.locals.session.email = req.body.email;
-                    res.redirect("/logged/");
+                    res.redirect("/");
                 }
                 else{
                     res.locals.session.loginFail = 1;
@@ -269,7 +269,7 @@ exports.validateAnswer = (req, res, next) =>
             else if(user.level!=10)
             {
                 console.log("not 10");
-                res.json({ data: "1",num:1, path: jsonParsed[user.level].question,level :user.level+1, number:user.level+1,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
+                res.json({ data: "1",num:1, path: jsonParsed[user.level].question,level :user.level, number:user.level+1,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
 
                 var myquery = { email: res.locals.session.email};
                 var newvalues = { $set: {level: user.level+1,updated_at:Date.now() } };
@@ -343,8 +343,16 @@ exports.myrankee=(req,res,next)=>
             {
                 if(users[i].email==res.locals.session.email)
                 {
-                    number=i+1+3;
+                    if(i>3)
+                    {
+                    number=i+1-3+3;
                     teame= users[i].franchise;
+                    }
+                    if(i<3)
+                    {
+                    number=i+1;
+                    teame= users[i].franchise;
+                    }
                 }
             }
             res.json({num:number,team:teame});
