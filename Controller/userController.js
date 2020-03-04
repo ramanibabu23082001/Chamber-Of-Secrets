@@ -345,7 +345,7 @@ exports.myrankee=(req,res,next)=>
                 {
                     if(i>3)
                     {
-                    number=i+1-3+3;
+                    number=i+1-3;
                     teame= users[i].franchise;
                     }
                     if(i<3)
