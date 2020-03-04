@@ -101,8 +101,7 @@
         var currentSlide = cdSlider.querySelector("li.current_slide");
         var nextColor = (currentSlide.nextElementSibling !== null) ? currentSlide.nextElementSibling.getAttribute("data-color") : item[0].getAttribute("data-color");
         var prevColor = (currentSlide.previousElementSibling !== null) ? currentSlide.previousElementSibling.getAttribute("data-color") : item[item.length-1].getAttribute("data-color");
-        if(item.length>2)
-        {
+        if(item.length>=1)       {
             nav.querySelector(".prev").style.backgroundColor = prevColor;
             nav.querySelector(".next").style.backgroundColor = nextColor;
 

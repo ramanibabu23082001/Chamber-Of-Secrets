@@ -1,4 +1,5 @@
   /* CORE STYLES */
+  @import url('https://fonts.googleapis.com/css?family=Poppins:700&display=swap');
 :root {
   --primary-color: rgba(13, 110, 139, 0.75);
   --overlay-color: rgba(24, 39, 51 , 0.85);
@@ -12,7 +13,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
   line-height: 1.4;
 }
 

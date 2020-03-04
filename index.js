@@ -4,6 +4,7 @@ const authRouter = require("./routes/authSystem");
 const bodyParser = require("body-parser");
 const path = require("path");
 const session = require("express-session");
+const ejsLint = require('ejs-lint');
 const User= require("../rahul/models/user");
 const app = express();
 app.locals.data = require('./JSON/question.json');

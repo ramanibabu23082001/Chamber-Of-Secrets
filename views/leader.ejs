@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>
+    Chamber of Secrets - ITRIX 20
     </title>
 
 	<meta charset="utf-8">
@@ -363,13 +364,10 @@ a:hover
     </thead>
   
 
-  </table>
-  
-</div>
- 
+  </table>  
 </div>
 </div>
-
+</div>
 </div>
 <br>
 <br>
@@ -384,22 +382,26 @@ a:hover
       </tr>
     </thead>
   <tbody>
-    <%for (var i=3;i < prods.length;i++){ %>
-      <tr >
+    
+   <% for (var i=0;i < prods.length;i++){ %>
+      <tr>
         <td><%= count+1%></td>
         <td><%=prods[i].name %></td>
         <td><%=prods[i].level %></td>
         <td><%=prods[i].franchise %></td>
       </tr>
+  
     <% count++;
-   } %>
+    }%>
     
+    <% if (currentPage==1){ %>
     <tr class="he" id="4"  >
       <td id="myr"> </td>
       <td id="myn">  </td>
       <td id="myl"> </td>
       <td id="myt"> </td>
     </tr>
+ <% } %>
     </tbody>
   
   </table>
@@ -510,35 +512,7 @@ $(document).ready(function(){
           
         }
       });
-      $.ajax({ 
-          type:"get",
-          url: "/myrank/",
-          success: function(jd){
-            console.log(jd);
-            var team= jd.team
-            switch(team)
-            {    
-                     case "kkr" :
-                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(133,85,196,1) 0%, rgba(64,10,136,1) 49%, rgba(50,7,107,1) 100%)';
-                  break;
-                case "rcb" :
-                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(0,0,0,1) 0%, rgba(210,3,35,1) 28%, rgba(255,0,0,1) 100%)';
-                break;
-                case "csk" :
-                  document.getElementById('4').style.background = 'linear-gradient(90deg, rgba(238,113,0,1) 0%, rgba(255,181,0,1) 61%, rgba(246,233,9,1) 100%)';
-                 break;
-                case "srh" :
-                  document.getElementById('4').style.background = 'linear-gradient(83deg, rgba(255,89,0,1) 26%, rgba(255,103,0,1) 100%)';
-                 break;
-                case "mi" :
-                  document.getElementById('4').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
-                 break;
-            }
-         $("#myn").replaceWith("  <td id=myn'> "+jd.name+"</td>");
-         $("#myl").replaceWith("  <td id='myl'> "+jd.level+"</td> ");
-         $("#myt").replaceWith("  <td id='myt'>"+jd.team+" </td>");          
-        }
-      });
+  
       $.ajax({ 
           type:"get",
           url: "/myrankee/",
@@ -563,7 +537,11 @@ $(document).ready(function(){
                   document.getElementById('4').style.background = 'radial-gradient(circle, rgba(11,56,133,1) 0%, rgba(16,73,172,1) 45%, rgba(28,10,109,1) 91%)';
                  break;
             }
-         $("#myr").replaceWith("  <td id='myr'>"+jd.num+"</td>");         
+        
+            $("#myr").replaceWith("  <td id='myr'>"+jd.num+"</td>");
+            $("#myn").replaceWith("  <td id=myn'> "+jd.name+"</td>");
+         $("#myl").replaceWith("  <td id='myl'> "+jd.level+"</td> ");
+         $("#myt").replaceWith("  <td id='myt'>"+jd.team+" </td>");            
         }
       });
 });

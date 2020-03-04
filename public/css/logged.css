@@ -48,16 +48,65 @@ body{
             opacity:1;
             transform: translateX(0);
         }
-}
-.logowrapper{
-    display: flex;
-    justify-content: center;
-}
-.logowrapper img{
-   
-    width:100%;
-    height:10vw;
-}
+    }
+    .footer{
+        position:relative;
+        margin-top:20vh;
+    }
+    .logowrapper{
+        position: absolute;
+        bottom:2%;
+        right:3%;
+      }
+      .logowrapper img{
+         
+          width:13vh;
+          height:8vh;
+      }
+
+      .timers{
+        left:3%;
+        bottom:3%;
+        position: absolute;
+        color:white;
+        
+    }
+    .timers p{
+        margin-bottom: 0;
+        font-family:'Poppins', sans-serif;
+        font-size:20px;
+    }
+    .timersp{
+        color:white;
+    }
+  
+      @media screen and (max-width: 768px) {
+         
+        .logowrapper img{
+            width:10vh;
+            height:7.5vh;
+        }
+        .timers p{
+            font-size:15px;
+        }
+      
+      }
+    
+      @media screen and (max-width: 400px){
+          
+          .logowrapper img{
+              position:relative;
+              width:7vh;
+              height: 5vh;
+          }
+          #section1{
+              top:8vh;
+          }
+          
+      
+          
+          }
+          
 
 .section1
 
@@ -263,13 +312,13 @@ animation: rotate 0.7s ease-in-out both;
     padding: 3%;
 
   
-
+}
    
 
 
 
-}
-/*carousel*/
+
+
 *, *::before, *::after{
     box-sizing: border-box;
     padding:0;
@@ -277,7 +326,7 @@ animation: rotate 0.7s ease-in-out both;
     border:0;
 
 }
-/*sliderstyle*/
+
 .cd-slider
 {
     position: relative;
@@ -423,7 +472,7 @@ nav > div > span {
 	transform: translate(-50%, -50%);
 	transition: width .6s, height .6s;
 }
-
+ 
 
 
 
@@ -676,27 +725,7 @@ font-family:'Poppins', sans-serif;
 
 
 
-@media screen and (max-width: 768px) {
 
-    /* CSS in here for mobile only */
-  .logo
-  {
-      margin-bottom:15px;
-  }
-  .dashboard
-  {
-     margin-left:7vw;
-     
-  }
-  .logowrapper img{
-      padding-left:20px;
-      width:30%;
-      height:20vw;
-  }
-
-    
-
-}
 
 @media screen and (max-width: 768px) {
 

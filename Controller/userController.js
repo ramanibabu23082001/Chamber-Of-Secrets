@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 
     }
 }));
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE=5;
 
 
 exports.addUserForm = (req, res, next) => {
@@ -316,46 +316,32 @@ exports.leaderthree=(req,res,next)=>
        console.log(err);
         });   
 }
-exports.myrank=(req,res,next)=>
-{
-    console.log('myrank');
-    User.findOne({email: res.locals.session.email})
-    .then(user=>
-        {
-            console.log(user);
-            res.json({name:user.name,level:user.level,team:user.franchise });
-        })
-     .catch(err=>
-        {
-              console.log(err);
-        });   
-}
+
 exports.myrankee=(req,res,next)=>
 {
+    email= res.locals.session.email;
     console.log('myrankee');
     User.find().sort([["level","descending"],["updated_at","ascending"]])
     .then(users=>
         {
-            let i=0;
-            var number=0;
+            let i;
+            var number;
             var teame;
+            var namee;
+            var levele;
             for(i=0;i<users.length;i++)
             {
-                if(users[i].email==res.locals.session.email)
+                if(users[i].email===email)
                 {
-                    if(i>3)
-                    {
-                    number=i+1-3;
-                    teame= users[i].franchise;
-                    }
-                    if(i<3)
-                    {
+                    
                     number=i+1;
                     teame= users[i].franchise;
-                    }
+                    namee= users[i].name;
+                    levele =users[i].level;
+                    console.log(number);
                 }
             }
-            res.json({num:number,team:teame});
+            res.json({num:number,team:teame,name:namee,level:levele});
         })
      .catch(err=>
         {
@@ -365,9 +351,10 @@ exports.myrankee=(req,res,next)=>
 
 exports.leader =(req,res,next)=>
 {
-  var email= res.locals.session.email 
+      var email= res.locals.session.email 
      const page = +req.query.page || 1;
-     let totalItems;``
+    
+     let totalItems;
      User.find().countDocuments()
      .then(numProducts => {
         totalItems = numProducts;
@@ -375,13 +362,15 @@ exports.leader =(req,res,next)=>
         .skip((page - 1) * ITEMS_PER_PAGE)//page- 1 = previous page number
         .limit(ITEMS_PER_PAGE).sort([["level","descending"],["updated_at","ascending"]]);
       })
-      .then(users => {
-        res.render('leader', {
+      .then(users =>{
+        var cou; 
+        console.log(page); 
+          res.render('leader',{
           prods: users,
           pagetitle: 'leaderboard',
           mail:email,
           currentPage: page,
-          count:((page-1)*5)+3,
+          count:((page-1)*5),
           hasNextPage: ITEMS_PER_PAGE * page < totalItems,
           hasPreviousPage: page > 1,
           nextPage: page + 1,

@@ -106,22 +106,6 @@ router.post("/findtime/", function (req, res, next) {
      userController.findhint
  );
 
- router.get("/myrank/", function (req, res, next) {
-    if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
-        res.redirect("/");
-    }
-    res.locals.session = req.session
-    res.set({
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-    })
-    next()
-
- },
-     userController.myrank
- );
 
 //end
 //from
@@ -148,6 +132,10 @@ router.get("/logged/", function (req, res, next) {
     }
     
     res.locals.session = req.session
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, DELETE, OPTIONS"
+    );
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
