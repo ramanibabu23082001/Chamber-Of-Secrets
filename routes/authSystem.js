@@ -2,11 +2,6 @@ const express = require("express");
 const router = express.Router();
 const csrf = require("csurf");
 const User= require("../models/user");
-//var session = require("express-session");
-
-//var loginFail = 0;
-//router.use(csrfProtection);
-
 const userController = require("../Controller/userController");
 
 router.post("/addUser/", function(req, res, next){
@@ -20,9 +15,30 @@ router.post("/addUser/", function(req, res, next){
 },
 userController.addUser);
 
+
+router.get("/rules/", function(req, res, next){
+    if (!req.session.email){
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
+        res.redirect("/");
+    }
+    res.locals.session = req.session;
+    res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+    })
+    next()
+},
+userController.rules);
 router.get("/leader/", function(req, res, next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }
     res.locals.session = req.session;
@@ -37,7 +53,10 @@ userController.leader);
 
 router.get("/myrankee/", function(req, res, next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }
     res.locals.session = req.session;
@@ -51,7 +70,10 @@ router.get("/myrankee/", function(req, res, next){
 userController.myrankee);
 router.get("/leaderthree/", function(req, res, next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }
     res.locals.session = req.session;
@@ -65,7 +87,10 @@ router.get("/leaderthree/", function(req, res, next){
 userController.leaderthree);
 router.get("/developer/", function(req, res, next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }
     res.locals.session = req.session;
@@ -77,7 +102,7 @@ router.get("/developer/", function(req, res, next){
     next()
 },
 userController.develop);
-//from
+
 router.post("/findtime/", function (req, res, next) {
     res.locals.session = req.session
    res.set({
@@ -89,12 +114,8 @@ router.post("/findtime/", function (req, res, next) {
  },
      userController.findtime
  );
-
-
  router.post("/findhint/", function (req, res, next) {
-     console.log('auth ook');
-    res.locals.session = req.session
-    
+    res.locals.session = req.session    
     res.set({
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
@@ -107,11 +128,13 @@ router.post("/findtime/", function (req, res, next) {
  );
 
 
-//end
-//from
+
 router.get("/finish/", function(req, res, next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        );
         res.redirect("/");
     }
     res.locals.session = req.session;
@@ -123,24 +146,24 @@ router.get("/finish/", function(req, res, next){
     next()
 },
 userController.finish);
-//end
 router.get("/logged/", function (req, res, next) {
 
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
+    
+        res.set({
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+        })
         res.redirect("/");
     }
     
     res.locals.session = req.session
-    res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET, POST, PATCH, DELETE, OPTIONS"
-    );
-    res.set({
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-    })
+
     next()
 },
     userController.loggedPage
@@ -161,6 +184,10 @@ router.get("/logout/", function (req, res, next) {
         'Pragma': 'no-cache',
         'Expires': '0',
     });
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, DELETE, OPTIONS"
+    );
     res.redirect("/");
 });
 
@@ -179,8 +206,11 @@ router.get("/", function (req, res, next) {
 
 router.post("/validateAnswer/", function (req, res, next) {
    if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
-        res.redirect("/");
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, DELETE, OPTIONS"
+    );  
+    res.redirect("/");
     }
     res.locals.session = req.session
    res.locals.text = req.body.name
@@ -189,7 +219,6 @@ router.post("/validateAnswer/", function (req, res, next) {
     userController.validateAnswer
 );
 router.post("/checkEmail/", function(req, res, next){
-    //console.log(req.body.email);
     
     res.locals.email = req.body.email
     next()
@@ -199,17 +228,27 @@ router.post("/checkEmail/", function(req, res, next){
 
 router.post("/logged/", function(req, res, next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, DELETE, OPTIONS"
+    );  
     res.redirect("/logged/");
 });
 
 
 router.get("/franchise/", function(req, res, next){
-    console.log("frans");
+   
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }
     res.locals.session = req.session;
@@ -228,16 +267,17 @@ router.post("/franchise/", function(req,res,next){
    
     if(!req.session.email)
     {
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }  
     var players=req.body.play;
         var p1=players[0];
         var p2= players[1];
         var p3= players[2];
-        //var franchise= res.locals.franchise;
         var email= req.session.email;
-        console.log(players);
         var k=0,franchise;
         var myquery = { email: email };
         var newvalues = { $set: {player1 : p1, player2 : p2, player3 : p3}};
@@ -250,16 +290,22 @@ router.post("/franchise/", function(req,res,next){
             'Pragma': 'no-cache',
             'Expires': '0',
         })
-res.redirect("/logged/");
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
+        res.redirect("/logged/");
 });
 
 router.post("/addFranchise/", function(req, res, next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
     }
-    console.log("hi");
-    console.log("The email is " + req.session.email);
+
     res.locals.email = req.session.email;
     res.locals.franchise = req.body.franchise;
     res.set({
@@ -274,7 +320,10 @@ userController.addFranchise
 
 router.post("/addPlayer/",function(req,res,next){
     if (!req.session.email){
-        //req.session.email = "hari@gmail.com";
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        );  
         res.redirect("/");
     }
     res.locals.email=req.session.email;
@@ -289,6 +338,4 @@ router.post("/addPlayer/",function(req,res,next){
     })
 },userController.addPlayer);
 
-
-//router.get("
 module.exports = router;

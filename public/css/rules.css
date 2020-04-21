@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Candal|Days+One|Passion+One|Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:700&display=swap');
 
 
 body{
@@ -32,7 +32,7 @@ h1{
 }
 .rules div{
     height:11.8vh;
-    font-family: 'Days One';
+    font-family: 'Poppins',sans-serif ;
     color:white;
     padding:20px;
 
@@ -47,10 +47,10 @@ h1{
    
   }
  .btn-primary{
-    background-color: rgba(50,7,107,1) !important;
+    background-color: #32a852 !important;
     border:none !important;
 
-    font-family:'Days One' ;
+    font-family:'Poppins',sans-serif ;
     position: relative;
     left:45%;
   }
@@ -63,11 +63,11 @@ h1{
     }
     
     .rules div{
-        height:11.8vh;
-        font-size:9.3px;
+        height:15vh;
+        font-size:13px;
         color:white;
         padding:5px;
-        font-family: 'Days One' ;
+        font-family: 'Poppins',sans-serif;
         
 
     }
@@ -76,4 +76,10 @@ h1{
     }
    
     
+}
+@media screen and (max-width: 350px)
+{
+    .rules div{
+        font-size:10px;
+    }
 }

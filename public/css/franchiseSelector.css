@@ -258,8 +258,11 @@ cursor:pointer !important;
         font-family:'Poppins',sans-serif;
         
     }
-    .playercontainer .header{
+    
+ .header{
         text-transform: uppercase;
+        color:black;
+        margin:0 auto;
     }
 .playercontainer .container{
     background-color:#DEEAF6 ;
@@ -293,8 +296,8 @@ cursor:pointer !important;
       color: grey;
       font-size: 15px;
     }
-    .playercontainer h1{
-    font-size:20px;
+    .playercontainer .header h1{
+    color:black !important;
       white-space: nowrap;
     
     }
@@ -305,7 +308,12 @@ cursor:pointer !important;
     }
     /* <!-- card end -->
     <!-- for checkbox --> */
-    
+    @media screen and (max-width:800px)
+    {
+        .playercontainer .header h1{
+            font-size:23px !important;
+        }
+    }
     
     @keyframes click-wave {
       0% {

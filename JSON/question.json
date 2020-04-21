@@ -1,85 +1,45 @@
 [{ 
-    "answer": "asuran",
+    "answer": "itrix",
     "number":1,
-   "question": ["/asset/one.jpg","/asset/two.jpg","/asset/virat.jpg" ],
-   "gif" :["/asset/fail1.gif","/asset/success1.gif"] ,
-   "clues":["thanush","rock","aask"],
-   "time": "23:38:00"
+   "question": ["/asset/itrix.jpg" ]
 },
 {
-    "answer": "gilli",
+    "answer": "thegameisafoot",
     "number":2,
-    "question": ["/asset/first.gif","/asset/images3.jpeg" ],
-    "gif" :["/asset/fail2.gif","/asset/success2.gif"] ,
-    "clues":["clue11","clue12","clue13"],
-    "time": "23:44:00"
+    "question": ["/asset/sdfh.png" ]
 },
 {
-    "answer": "kaithi",
+    "answer": "animals",
     "number":3,
-    "question": [ "/asset/csk1.png","/asset/csk2.png","/asset/virat1.jpg"],
-    "gif" :["/asset/fail1.gif","/asset/success1.gif"],
-    "clues":["clue21","clue22","clue22"],
-    "time": "23:46:00"
-
+    "question": [ "/asset/uyiub.jpeg","/asset/sfklj.png"]
 },
 {
-    "answer": "mani",
+    "answer": "bermudatriangle",
     "number":4,
-    "question": [ "/asset/users/user1","/asset/users/user2","/asset/users/user3" ] ,
-    "clues":["clue31","clue32","clue32"],
-    "time": "24:00:00"
-
-    
+    "question": ["/asset/fdsf.png","/asset/sffdfh.jpeg","/asset/hsdf.jpg" ] 
 },
 {
-    "answer": "ramesh",
+    "answer": "kobebryant",
     "number":5,
-    "question": [ "/asset/users/user4","/asset/users/user5"],
-    "clues":["clue1","clue2","clue2"],
-    "time": "10:30:00"
-
+    "question": ["/asset/dsfd.jpg", "/asset/iuoy.jpg"]
 },
 {
-    "answer": "suresh",
+    "answer": "annefrank",
     "number":6,
-    "question": [ "/asset/users/user7","/asset/users/user8","/asset/users/user1"],
-    "clues":["clue1","clue2","clue2"],
-    "time": "12:50:00"
+    "question": [ "/asset/kjsdlf.jpeg","/asset/qeewre.jpeg"]
+   
 
 },
 {
-    "answer": "jeeva",
+    "answer": "cyberpunk2077",
     "number":7,
-    "question": [ "/asset/csk3.png","/asset/csk4.png","/asset/csk5.png"],
-    "clues":["clue1","clue2","clue2"],
-    "time": "23:00:00"
+    "question": ["/asset/yiyue.jpg","/asset/poorfh.jpg"],
+    "redirect" : "/finish/"
 },
 {
     "answer": "nagasanjay",
     "number":8,
-    "question": [ "/asset/mi1.png","/asset/mi2.png","/asset/mi3.png" ],
-    "clues":["clue1","clue2","clue2"],
-    "time": "23:00:00"
-   
-    
-},
-{
-    "answer": "abishek",
-    "number":9,
-    "question": [ "/asset/mi4.png","/asset/mi5.png","/asset/srh1.png" ],
-    "clues":["clue1","clue2","clue2"],
-    "time": "23:00:00"
-    
-},
-{
-    "answer": "kishore"  ,
-    "number":10,
-    "question": [ "/asset/srh2.png","/asset/srh3.png","/asset/srh4.png" ] ,
-    "clues":["clue1","clue2","clue2"],
-    "time": "23:00:00",
- "redirect" : "/finish/"
-    }
-
+    "question": [ "/asset/mi1.png","/asset/mi2.png","/asset/mi3.png" ]     
+}
 
 ]

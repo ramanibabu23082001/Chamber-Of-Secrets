@@ -54,6 +54,10 @@ margin: 40px 0px 20px;
   font-size: 16px;
   width: 25%; 
 } 
+.modal-dialog
+{
+  padding-top: 90px;
+}
 
    .modal-content {
 
@@ -145,7 +149,7 @@ margin: 40px 0px 20px;
     const year = new Date().getFullYear();
 
 
-const sixthMarch = new Date("mar 05, 2020 17:00:00").getTime();
+const sixthMarch = new Date("mar 07, 2020 18:00:00").getTime();
 
 
 
@@ -200,6 +204,7 @@ document.getElementById("timer").innerHTML =
               <p>Hola, <%= loggedUser[0].name %> </p>
               <p id="levelno">🏆 <%= level %></p>
             </div>
+            
 
             <div class="carousel">
               <!--Carousel Begins-->
@@ -215,7 +220,7 @@ document.getElementById("timer").innerHTML =
                       <div class ="content" >
                         <div class="imagecontainer">
                           <div class="imagewrapper">
-                            <img src="<%= question.question[i] %>" alt="" class="<%= places[i] %>">
+                            <img src="<%= question.question[i] %>" alt="" class="<%= places[i] %>" >
                           </div>
                         </div>
                       </div>
@@ -247,6 +252,14 @@ document.getElementById("timer").innerHTML =
 
               </div>
             </div>
+
+<% if(level==3) { %>
+
+            <div class="questionh3" style="padding-top:4px; padding-bottom: 5px;">
+              <h3 id="question">what is common for the above images?</h3>
+            </div>
+            <% } %>
+
             <div class="wronganswer">
               <p class="right" data-toggle="modal" data-target="#myModal"></p>
               <p class="wrong"></p>
@@ -297,7 +310,7 @@ document.getElementById("timer").innerHTML =
 
   <div class="container" id="popup">
     <div class="row queen" >
-      <i class="fa fa-times-circle" id="close" onclick="location.reload()" ></i>
+      <i class="fa fa-times-circle" id="close" alt="close" onclick="location.reload()" ></i>
     </div>
 
     <div class="row king">
@@ -311,7 +324,7 @@ document.getElementById("timer").innerHTML =
           😎 You 🆚 CPU 🤖
         </div>
       </div>
-      <div class="col-4 col-md-4 team2">
+      <div class="col-4 dcol-md-4 team2">
         <img src="" alt="" style="width: 90%; height:90%" id="opp">
       </div>
 
@@ -328,7 +341,7 @@ document.getElementById("timer").innerHTML =
           <h4 class="modal-title">Hurrah!! You got it Right</h4>
         </div>
         <div class="modal-body">
-          <img class="img-responsive" src="" alt="Chania" style="width: 100%;">
+          <img class="img-responsive" src="" alt="" style="width: 100%;">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-info btn-lg" data-dismiss="modal" onclick="toggle()">Close</button>
@@ -341,7 +354,7 @@ document.getElementById("timer").innerHTML =
 
   <div id="hintmodel" class="modalo">
     <div class="modal-contento">
-      <span class="closeo">&times;</span>
+      <span class="closeo" style="color:black" alt="close"><i class="fa fa-times-circle"></i></span>
       
       <div class="hint">    <span class="enclosed">Hint 1</span>   <p id="uuu" class="hintclass1"></p>
       </div>
@@ -373,7 +386,7 @@ document.getElementById("timer").innerHTML =
     $('#close').keypress(function(event){
       var keycode = (event.keyCode ? event.keyCode : event.which);
                                  if(keycode == '13'){
-                                  console.log("close"); 
+                                  
                                   toggle();
 
                                  }
@@ -383,7 +396,7 @@ document.getElementById("timer").innerHTML =
                    var texte = text.toLowerCase().replace(/\s/g,'');
                    var keycode = (event.keyCode ? event.keyCode : event.which);
                                  if(keycode == '13'){ 
-                                   console.log("clicked");   
+                                 
                        $.ajax({
                        type:"post",
                        url:'/validateAnswer',
@@ -392,9 +405,9 @@ document.getElementById("timer").innerHTML =
                               
                               if(jd.data=="1")
                               {
-                                  console.log(jd.path);
+                                  
                             
-                                 if(jd.num==10)
+                                 if(jd.num==7)
                                  {
                                     preventBack();
                                   window.location.href = jd.redirect;
@@ -409,7 +422,7 @@ document.getElementById("timer").innerHTML =
                                  $("#my").val('');
                                  $("#levelno").replaceWith("<p id='levelno'>🏆"+ jd.number+"</p>");
                                  $("#compeletedLevel").text("Level " +jd.level+ " 🆙");  
-       
+                       
                                $( ".img-responsive").replaceWith( "<img src='"+jd.gif+"' class='img-responsive'>");
                                $(".match").replaceWith(" <div class='match'>😎 "+jd.curTeam.team+" 🆚 "+jd.oppTeam.team+" 🤖</div>");
                                $("#you").replaceWith(" <img src='"+jd.curTeam.pla_photo[0]+"' alt='' id='you' style='width: 90%; height:90%'>");
@@ -421,7 +434,6 @@ document.getElementById("timer").innerHTML =
                               
                              }
                              else if(jd.data=='0'){   
-                               console.log(jd);
                            $(".wrong").replaceWith("<p class='wrong'>Wrong Answer!!</p>");
                               $(".wrong").show("slow").delay(3500).queue(function(n) {
                                  $(this).hide("slow");n();
@@ -437,7 +449,7 @@ document.getElementById("timer").innerHTML =
                  
                  
                              $('#close').keypress(function(event){
-                              console.log("clickeeee");   
+                       
          var keycode = (event.keyCode ? event.keyCode : event.which);
                                  if(keycode == '13'){ 
                                    
@@ -453,48 +465,31 @@ document.getElementById("timer").innerHTML =
 $('#answerbutton').on('click', function () {
       var text = document.getElementById("my").value;
       var texte = text.toLowerCase().replace(/\s/g,'');
-
       $.ajax({
-        type: "post",
-        url: '/validateAnswer/',
-        data: { name: texte },
-        success: function (jd) {
-
-          if (jd.data == "1") {
-            
-            if(jd.num==10){
-                   preventBack();                            
-                   window.location.href = jd.redirect;
-
+                       type:"post",
+                       url:'/validateAnswer',
+                       data:{name: texte},
+                       success: function(jd) {
+                              
+                              if(jd.data=="1")
+                              {
+          
+                            
+                                 if(jd.num==7)
+                                 {
+                                    preventBack();
+                                  window.location.href = jd.redirect;
+                                  
                                  } 
-                                 else{  
-                                  jQuery("#myModal").modal('toggle');
+                             else{                                              
+                                 jQuery("#myModal").modal('toggle');
                                  $("#level-pop").replaceWith("<h1 id='level-pop'>Level " + jd.number +" 🆙</h1>");
-                                 /*
                                  $(".first").replaceWith("<img src='"+jd.path[0]+"' class='first'>");
                               $(".second").replaceWith("<img src='"+jd.path[1]+"' class='second'>");
                                $(".third").replaceWith("<img src='"+jd.path[2]+"' class='third'>");
-                               */  
-                               var htmlToBeAdded = '<ul id="changing-question">',
-                sliderHTML = '<div class="row app" id = "changing-slider">';
-            var colors = ["#FF384B", "#FF9C00", "#002AFF"];
-            for(var i = 0; i < jd.path.length; i++){
-              if(i === 0){
-                htmlToBeAdded += '<li data-color="' + colors[i%3] + '" id="' + (i+1) + '" class = "current_slide"> <div class="content"> <div class="imagecontainer"><div class="imagewrapper"><img src="' + jd.path[i] +'" alt="" class="' + places[i] + '"></div></div></div></li>';
-                sliderHTML += "<div class = 'but active'></div>";
-                continue;
-              }
-              htmlToBeAdded += '<li data-color="' + colors[i%3] + '" id="' + (i+1) + '"> <div class="content"> <div class="imagecontainer"><div class="imagewrapper"><img src="' + jd.path[i] +'" alt="" class="' + places[i] + '"></div></div></div></li>';
-              sliderHTML += "<div class='but'></div>";
-            }
-            htmlToBeAdded += '</ul>';
-            sliderHTML += '</div>';
-            $("#changing-question").replaceWith(htmlToBeAdded);
-            $("#changing-slider").replaceWith(sliderHTML);
                                  $("#my").val('');
                                  $("#levelno").replaceWith("<p id='levelno'>🏆"+ jd.number+"</p>");
                                  $("#compeletedLevel").text("Level " +jd.level+ " 🆙");  
-       
                                $( ".img-responsive").replaceWith( "<img src='"+jd.gif+"' class='img-responsive'>");
                                $(".match").replaceWith(" <div class='match'>😎 "+jd.curTeam.team+" 🆚 "+jd.oppTeam.team+" 🤖</div>");
                                $("#you").replaceWith(" <img src='"+jd.curTeam.pla_photo[0]+"' alt='' id='you' style='width: 90%; height:90%'>");
@@ -502,20 +497,19 @@ $('#answerbutton').on('click', function () {
                                   $(".modal fade").show("slow").delay(5000).queue(function(n) {
                                  $(this).hide("slow");n(); 
                                });
-
-                                 }
-          }
-          else if(jd.data=='0') {
-                 console.log(jd);
+                              }
+                              
+                             }
+                             else if(jd.data=='0'){   
+      
                            $(".wrong").replaceWith("<p class='wrong'>Wrong Answer!!</p>");
                               $(".wrong").show("slow").delay(3500).queue(function(n) {
                                  $(this).hide("slow");n();
                                });
-          
-          }
-
-        }
-      });
+                              } 
+                             
+                            }
+                           });
     });
    
     
@@ -593,7 +587,7 @@ $('#answerbutton').on('click', function () {
     function aws1() {
       var now = new Date().getTime();
       var countDownDate=new Date(counta).getTime();
-      console.log(countDownDate);
+  
        distance1 = countDownDate - now;
      // var days = Math.floor(distance1 / (1000 * 60 * 60 * 24));
       
@@ -603,7 +597,7 @@ $('#answerbutton').on('click', function () {
       
     
       if (distance1 < 0) {
-        console.log('varuthu');
+
         var no=1;
         var num;
     $.ajax({
@@ -626,9 +620,9 @@ $('#answerbutton').on('click', function () {
     function aws2() {
       var now = new Date().getTime();
       var countDownDate=new Date(countb).getTime();
-      console.log(countDownDate);
+    
        distance2 = countDownDate - now;
-      //var days = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+   
       
       var hours = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
@@ -656,10 +650,9 @@ $('#answerbutton').on('click', function () {
     function aws3() {
       var now = new Date().getTime();
       var countDownDate=new Date(countc).getTime();
-      console.log(countDownDate);
+
        distance3 = countDownDate - now;
-     // var days = Math.floor(distance3 / (1000 * 60 * 60 * 24));
-      
+
       var hours = Math.floor((distance3 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance3 % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance3 % (1000 * 60)) / 1000);

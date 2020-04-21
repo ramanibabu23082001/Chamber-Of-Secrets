@@ -266,9 +266,11 @@ a:hover
         <div>
           <ul>
             <li><a href="/logged/">Home</a></li>
+            <li><a href="/rules/">Rules</a></li>
             <li><a href="/leader/">Leader Board</a></li>
             <li><a href="/developer/">Developer's Team</a></li>
             <li><a href="/logout/">Logout</a></li>
+       
           </ul>
         </div>
       </div>
@@ -517,7 +519,6 @@ $(document).ready(function(){
           type:"get",
           url: "/myrankee/",
           success: function(jd){
-            console.log(jd);
             var team= jd.team;
             switch(team)
             {    

@@ -23,7 +23,7 @@ exports.addUser = (req, res, next) => {
     const password = req.body.password;
     const contact = req.body.contact;
     const college = req.body.college;
-   bcrypt   .hash(password, 12)
+   bcrypt.hash(password, 12)
               .then(hashedPassword => {//hashed password from bcrpt because we give a promise
                 const user = new User({
                     name: name, email: email, password: hashedPassword, contact: contact, college: college ,created_at:Date.now() 
@@ -32,7 +32,6 @@ exports.addUser = (req, res, next) => {
               })
               .then(result => {
                 res.locals.session.email = email,
-                console.log("User created successfully!"),
                 //res.render("franchiseSelector");
                 res.setHeader(
                     "Access-Control-Allow-Methods",
@@ -52,26 +51,31 @@ exports.addUser = (req, res, next) => {
    
     
 };
-//to
+
 exports.loginForm = (req, res, next) => {
     if(res.locals.session.email)
+     { 
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PATCH, DELETE, OPTIONS"
+        ); 
         res.redirect("/");
+}
     res.render("loginForm", {
         message: ""
-        //csrfToken: res.locals.csrfToken
     });
 };
-//from
 exports.finish = (req, res, next) => {
+  
     res.render('finish');
 };
 //to
 //from
 exports.loginCheck = (req, res, next) => {
-      //var credentials = {email: req.body.email, password: req.body.password};
+   
       const email=req.body.email
       const password= req.body.password;
-        //console.log("Login fail before is " + res.locals.loginFail);
+     
         User.findOne({email:email})
         .then(user => {
             bcrypt
@@ -84,16 +88,24 @@ exports.loginCheck = (req, res, next) => {
                 }
                 else{
                     res.locals.session.loginFail = 1;
+                    res.setHeader(
+                        "Access-Control-Allow-Methods",
+                        "GET, POST, PATCH, DELETE, OPTIONS"
+                    ); 
                     res.redirect("/");
                 }
             })
             .catch(err=>
                 {
                console.log('err');
+               res.setHeader(
+                "Access-Control-Allow-Methods",
+                "GET, POST, PATCH, DELETE, OPTIONS"
+            ); 
                res.redirect('/');
                 });
             })
-            //console.log(user);
+          
         .catch(err => {
             console.log(err);
         });
@@ -103,13 +115,9 @@ exports.loggedPage = (req, res, next) => {
     User.find({email: res.locals.session.email})
     .then(user => {
         const jsonFile = require("../JSON/question.json");
-        //console.log("Welcome " + user);
-        const q = jsonFile[user[0].level - 1];
-        console.log(q);
-//from 
-       if(user[0].level==11)
+        const q = jsonFile[user[0].level - 1]; 
+       if(user[0].level==8)
         {
-            console.log('asdf');
             res.setHeader(
                 "Access-Control-Allow-Methods",
                 "GET, POST, PATCH, DELETE, OPTIONS"
@@ -125,7 +133,7 @@ exports.loggedPage = (req, res, next) => {
             });
         
         }
-        //to
+        
     })
     .catch(err => {
         console.log(err);
@@ -134,16 +142,13 @@ exports.loggedPage = (req, res, next) => {
 
 exports.landingPage = (req, res, next) => {
 
-    console.log('asdfas');
+   
     User.findOne({email:req.session.email})
  .then(user=>{
-         console.log(user);
-         console.log("seesion")
+         
          if(req.session.email)
 {
          if(user.franchise==null&&user.player1==null)
-         
-          console.log("fran");
          
           res.setHeader(
             "Access-Control-Allow-Methods",
@@ -155,13 +160,11 @@ exports.landingPage = (req, res, next) => {
 }
          else
         { 
-            console.log("Login fail value is " + res.locals.session.loginFail);
             var login_error = "";
             if(res.locals.session.loginFail === 1){
                 login_error = "Incorrect username/password";
             }
             res.render("landingPage", {
-                //csrfToken: res.locals.csrfToken
                 loginFail: res.locals.session.loginFail,
                 login_error: login_error
             });
@@ -173,18 +176,13 @@ exports.landingPage = (req, res, next) => {
        console.log(err);
         }); 
 }
-//from
 exports.findtime = (req, res, next) => {
 
     User.findOne({email: res.locals.session.email})
     .then(user => {
-        console.log("your level is " + user.level);
         var i = user.level - 1;    
         const jsonParsed = require("../JSON/hint.json");
-        //console.log("the time is " + jsonParsed[i].ht1 + jsonParsed[i].ht2 +jsonParsed[i].ht3);
-        //console.log(jsonParsed[i]);
         res.json({ht1:jsonParsed[i].ht1,ht2:jsonParsed[i].ht2,ht3:jsonParsed[i].ht3 });
-                
          });
 
 }
@@ -194,22 +192,18 @@ exports.findhint = (req, res, next) => {
     User.findOne({email: res.locals.session.email})
     .then(user => {
         const num = res.locals.num;
-        //console.log("your level is " + user.level);
-        var i = user.level - 1;    
         const jsonParsed = require("../JSON/hint.json");
-        //console.log("the time is " + jsonParsed[i].ht1 + jsonParsed[i].ht2 +jsonParsed[i].ht3);
-        console.log('user controller ok');
         if(num==1)
         {
-            res.json({hint1: jsonParsed[i].hint1 });
+            res.json({hint1: jsonParsed[user.level-1].hint1 });
         }
         else if(num==2)
         {
-            res.json({hint2: jsonParsed[i].hint2 });
+            res.json({hint2: jsonParsed[user.level-1].hint2 });
         }
         else
         {
-            res.json({hint3: jsonParsed[i].hint3 });
+            res.json({hint3: jsonParsed[user.level-1].hint3 });
         }
         
                 
@@ -218,15 +212,12 @@ exports.findhint = (req, res, next) => {
 }        
 exports.validateAnswer = (req, res, next) =>
 {
-    console.log("Your email is " + res.locals.session.email);
+ 
     User.findOne({email: res.locals.session.email})
     .then(user => {
-        console.log("your level is " + user.level);
         const tex = res.locals.text;
         const jsonParsed = require("../JSON/question.json");
-        console.log("The answer is " + jsonParsed[user.level-1].answer);
         if (jsonParsed[user.level-1].answer === tex) {
-            console.log('correct'); 
             const jspl=require("../JSON/player.json");
             var num;
             var random =  Math.floor((Math.random() * 4) + 0);
@@ -247,42 +238,37 @@ exports.validateAnswer = (req, res, next) =>
             for(k=0;k<5;k++)
                 if(jspl[k].team === user.franchise)
                     break;
-                console.log(k);
+         
                     if(user.level === 1||user.level === 4||user.level === 7)
                         gifPath=jspl[k].gif[user.player1];
                     else if(user.level === 2||user.level === 5||user.level === 8)
                         gifPath=jspl[k].gif[user.player2];
                     else if(user.level === 3||user.level === 6||user.level === 9)
                         gifPath=jspl[k].gif[user.player3];      
-                        console.log(gifPath);  
-            //form
-            if(user.level==10)
+            if(user.level==7)
             {
-                res.json({ data: "1",num: 10,redirect:jsonParsed[user.level-1].redirect });
+                res.json({ data: "1",num: 7,redirect:jsonParsed[user.level-1].redirect });
                 var myquery = { email: res.locals.session.email };
                 var newvalues = { $set: {level: user.level+1 } };
                 User.updateOne(myquery, newvalues, function(err, res){
                     if(err) throw err;
-                    console.log("Level updated");
                 });
             }
-            else if(user.level!=10)
+            else if(user.level!=7)
             {
-                console.log("not 10");
+               
                 res.json({ data: "1",num:1, path: jsonParsed[user.level].question,level :user.level, number:user.level+1,  gif:gifPath, oppTeam : jspl[random] , curTeam : jspl[num] }); 
-
                 var myquery = { email: res.locals.session.email};
                 var newvalues = { $set: {level: user.level+1,updated_at:Date.now() } };
                 User.updateOne(myquery, newvalues, function(err, res){
                     if(err) throw err;
-                    console.log("Level updated");
                 });
             }
             }
             else {
-                console.log(jsonParsed[user.level-1].gif);
+             
                 res.json({ data: "0" });
-            }  //to
+            }  
     });
     
    
@@ -291,7 +277,6 @@ exports.validateAnswer = (req, res, next) =>
 exports.checkEmail = (req, res, next) => {
     User.findOne({email: res.locals.email})
     .then(user => {
-        console.log("The user with email is " + user);
         if(user != null){
             res.json({message: "Email already exists"});
         }
@@ -302,11 +287,10 @@ exports.checkEmail = (req, res, next) => {
 }
 exports.leaderthree=(req,res,next)=>
 {
-    console.log('leadera');
     User.find().sort([["level","descending"],["updated_at","ascending"]]).limit(3)
     .then(user=>
         {
-            console.log(user);
+        
             
             res.json({onename:user[0].name,onelevel:user[0].level,oneteam:user[0].franchise, twoname:user[1].name,twolevel:user[1].level,twoteam:user[1].franchise,threename:user[2].name,threelevel:user[2].level,threeteam:user[2].franchise });
           
@@ -320,7 +304,6 @@ exports.leaderthree=(req,res,next)=>
 exports.myrankee=(req,res,next)=>
 {
     email= res.locals.session.email;
-    console.log('myrankee');
     User.find().sort([["level","descending"],["updated_at","ascending"]])
     .then(users=>
         {
@@ -338,7 +321,7 @@ exports.myrankee=(req,res,next)=>
                     teame= users[i].franchise;
                     namee= users[i].name;
                     levele =users[i].level;
-                    console.log(number);
+             
                 }
             }
             res.json({num:number,team:teame,name:namee,level:levele});
@@ -359,12 +342,12 @@ exports.leader =(req,res,next)=>
      .then(numProducts => {
         totalItems = numProducts;
         return User.find()
-        .skip((page - 1) * ITEMS_PER_PAGE)//page- 1 = previous page number
+        .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE).sort([["level","descending"],["updated_at","ascending"]]);
       })
       .then(users =>{
-        var cou; 
-        console.log(page); 
+        
+    
           res.render('leader',{
           prods: users,
           pagetitle: 'leaderboard',
@@ -379,48 +362,27 @@ exports.leader =(req,res,next)=>
         });
       })
       .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
+        console.log(err);
       });
-    // User.find().sort([["level","descending"],["updated_at","descending"]]).limit(3)
-    // .then(user=>
-    //     {
 
-    //         console.log(user);
-    //      res.render("leader",{
-    //       pagetitle : "leaderboard",
-    //       one: user[0],
-    //       two:user[1],
-    //  three:user[2],
-    //     //   four: user[3]
-    //     //   five:user[4],
-    //     //   six:user[5],
-    //     //   seven: user[6],
-    //     //   eightwo:user[7],
-    //     //   nine:user[8],
-    //     //   ten:user[9],
-    //      });
-    //     })
-    //  .catch(err=>
-    //     {
-    //    console.log(err);
-    //     });   
     
 }
 exports.develop =(req,res,next)=>
 {
     res.render("developer");
 }
+exports.rules=(req,res,next)=>
+{
+    res.render("rules");
+}
+
 
 exports.addPlayer= (req,res,next)=>{
-    console.log("what");
-    console.log(res.locals.pla1);
 }
 
 exports.addFranchise= (req,res,next)=>{
     const tex = res.locals.franchise;
-        console.log(res.locals.email);
+      
      var myquery = { email: res.locals.email };
                 var newvalues = { $set: {franchise: tex} };
                 User.updateOne(myquery, newvalues, function(err, res){
@@ -428,17 +390,15 @@ exports.addFranchise= (req,res,next)=>{
                 });
                      User.findOne({email: res.locals.email})
         .then(user => {
-                console.log(user.franchise);
+            
             })
             var i=0;
         const jsonParsed = require("../JSON/player.json");
-        //console.log("The answer is " + jsonParsed[i].answer);
         for(i=0;i<5;i++)
         if (jsonParsed[i].team === tex) {
                 res.json({ data: "1",team: jsonParsed[i].team_name,pla_name: jsonParsed[i].pla_name,pla_photo:jsonParsed[i].pla_photo});
             }         
 }
-
 exports.franchise = (req, res, next) => {
     if(req.session.email)
     {
@@ -447,9 +407,14 @@ exports.franchise = (req, res, next) => {
             {
                 if(user.franchise!=null&&user.player1!=null)
                 {
+                    res.setHeader(
+                        "Access-Control-Allow-Methods",
+                        "GET, POST, PATCH, DELETE, OPTIONS"
+                    );           
                     res.redirect("/logged");
                 }
                 else{
+                    
                     res.render("franchiseSelector");
                 }
             })

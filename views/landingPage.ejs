@@ -126,8 +126,8 @@
                             <div id="contact_error" style="color: red;"></div>
                         </div>
                         <div class="inputBox">
-                            <label>College Name</label>
-                            <input type="text" name="college" placeholder="college" required>
+                            <label>College(if you are a student)</label>
+                            <input type="text" name="college" placeholder="college" > 
                         </div>
                         <div class="inputBox">
                             <label>Password</label>
@@ -162,39 +162,38 @@
             
             <div class="row justify-content-center r1">
                 <div class="col-10 col-md-8 one">
-                <span class="enclosed">Rule1</span>  The event consists of a series of levels with visuals and texts that you must solve to advance.</div>
+                <span class="enclosed">Rule1</span> This is a treasure kind of a game in which the participant should try to find the answer by identifying the similarity and connecting the given images. </div>
             </div>
             <div class="row justify-content-center r2">
                 <div class="col-10 col-md-8 one">
-                <span class="enclosed">Rule2</span>  This is a non-technical event and there is absolutely no preparation or previous experience needed.  
+                <span class="enclosed">Rule2</span>   The game will be live for three days.
                     </div>
             </div>
             <div class="row justify-content-center r3">
                 <div class="col-10 col-md-8 one">
-                <span class="enclosed">Rule3</span>    If they answer incorrectly, they can keep on guessing until they get it right.
-                - You can also revisit previous question for reference.
+                <span class="enclosed">Rule3</span>    Each day is independent and one winner will be chosen each day.
                     </div>
             </div>
             <div class="row justify-content-center r4">
                 <div class="col-10 col-md-8 one">
-                <span class="enclosed">Rule4</span>  The moderators are there to monitor the progress of players and glitches/bugs.
+                <span class="enclosed">Rule4</span>  The UI of the website has no relation to the questions.
                     </div>
             </div>
             <div class="row justify-content-center r5">
                 <div class="col-10 col-md-8 one">
-                <span class="enclosed">Rule5</span> Participants can only move on to the next level if he/she correctly answers the previous one.    Clues will be provided as and when required.
+                <span class="enclosed">Rule5</span> Clues will be updated periodically in the specified time.
                     </div>
             </div>
-            <div class="row justify-content-center r6">
+            <!-- <div class="row justify-content-center r6">
                 <div class="col-10 col-md-8 one">
-                <span class="enclosed">Rule6</span>  Spamming on the forums, using offensive language, cheating or helping other players will lead to disqualification from the event.
+                <span class="enclosed">Rule6</span>  
             </div>
             </div>
             <div class="row justify-content-center r7">
                 <div class="col-10 col-md-8 one">
-                <span class="enclosed">Rule7</span>   The organizers' decision is final.
+                <span class="enclosed">Rule7</span>   
                     </div>
-            </div>
+            </div> -->
             <div class="row justify-content-center r8">
                 <div class="col-10 col-md-8 one">
                     <button type="button" class="btn btn-primary" onclick="kkk()">Skip</button>
@@ -258,9 +257,8 @@
         }
 
         function checkLoginFail() {
-            //console.log("The value of login fail is" + document.getElementById("wrong_credentials").value);
             if (document.getElementById("wrong_credentials").value == 1) {
-                //console.log("display the login");
+                
                 displayLogin();
                 document.getElementById("wrong_credentials").value == 0;
             }
@@ -304,13 +302,15 @@
                 if (cpwd != pwd) {
                     $('#showErrorPwd').html('Passwords are not matching');
                     $('#showErrorPwd').css('color', 'red');
+                    disableSubmit();
                     return false;
                 }
                 else {
                     $('#showErrorPwd').html('');
-
+                    enableSubmit();
                     return false;
                 }
+
             });
 
         });
@@ -334,9 +334,9 @@
         }
 
         function checkEmail1(){
-            console.log("hi");
+
             var email = document.getElementById("email1").value;
-            console.log(email);
+
             $.ajax({
                 type: "post",
                 url: "/checkEmail/",
