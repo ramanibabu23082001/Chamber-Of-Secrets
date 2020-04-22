@@ -19,7 +19,7 @@ Online Connection game where the carousel of images will be displayed up and peo
 2. BOOTSTRAP & MEDIA QUERIES
 3. NODE JS
 4. EXPRESS JS
-5. MONOGO DP
+5. MONOGO DB
 6. AJAX
 7. DIGITAL OCEAN
 
